@@ -1,6 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { esCvu, validarCbu } from "@/lib/cbu";
 
+/** CBU/CVU REALES sacados de comprobantes de Alberto (verificados con el algoritmo). */
+describe("validarCbu con CBU/CVU reales", () => {
+  it.each([
+    "0270065620057590300025", // CBU Supervielle
+    "0000046800000159185229", // CBU Prestigio Pagos (Pago Virtual del Sur)
+    "0000003100043103826391", // CVU Mercado Pago
+    "0000003100038727339550", // CVU Mercado Pago
+    "0000290700000000020972", // cuenta origen del comprobante tipo \"Finalizada\" (banco sin identificar)
+  ])("%s", (c) => expect(validarCbu(c)).toBe(true));
+});
+
 /**
  * CBU SINTÉTICOS: armados a mano aplicando los ponderadores del enunciado para
  * probar el algoritmo. Falta sumar CBU/CVU reales de comprobantes (pendiente de Alberto).
