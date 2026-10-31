@@ -10,14 +10,13 @@
   "ordenante": "Daniel Alberto Argañaraz",
   "cuit_ordenante": "20129183617",
   "cbu_origen": "0270065620057590300025",
-  "banco_origen": null,
+  "banco_origen": "BANCO SUPERVIELLE S.A.",
   "cbu_destino": "0000046800000159185229",
   "banco_destino": null,
   "alias_destino": null,
   "destinatario": "Prestigio Pagos S.a.",
   "concepto": null,
   "advertencias": [
-    "CBU origen: entidad no encontrada en la tabla",
-    "CBU destino: entidad no encontrada en la tabla"
+    "CBU destino: entidad Pago Virtual del Sur pendiente de confirmar, no se completa el banco"
   ]
 }

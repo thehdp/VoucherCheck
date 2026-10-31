@@ -38,3 +38,15 @@ describe("validarCbu", () => {
     expect(esCvu(ok)).toBe(false);
   });
 });
+
+import { buscarEntidad } from "@/lib/cbu";
+describe("buscarEntidad (tabla BCRA)", () => {
+  it("banco por los 3 primeros dígitos", () => {
+    expect(buscarEntidad("0270065620057590300025")?.nombre).toBe("BANCO SUPERVIELLE S.A.");
+    expect(buscarEntidad("3840200500000033928869")?.nombre).toBe("UALA BANK S.A.U.");
+  });
+  it("CVU de proveedor pendiente no se da por confirmado", () => {
+    expect(buscarEntidad("0000003100043103826391")?.pendiente).toBe(true);
+  });
+  it("CVU desconocido → null", () => expect(buscarEntidad("0000290700000000020972")).toBeNull());
+});

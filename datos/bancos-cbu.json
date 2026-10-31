@@ -1,10 +1,530 @@
 {
-  "_nota": "Tabla armada desde el listado oficial del BCRA. TODAS las entradas están pendientes de confirmar contra la fuente oficial: no se usan para completar banco_origen/banco_destino hasta que pendiente sea false. Para CVU (empieza con 000) el código es de 8 dígitos (000 + los 5 siguientes); no hay ninguno confirmado todavía.",
+  "_nota": "Bancos: listado de entidades del BCRA pasado por Alberto (3 dígitos = primeros 3 del CBU). Algunos nombres vienen truncados en la fuente. Las compañías financieras (5 dígitos) no se usan para CBU y quedan pendientes. Proveedores de CVU (8 dígitos: 000 + 5): sin listado oficial todavía, solo vistos en comprobantes, pendientes.",
   "entidades": [
-    { "codigo": "007", "tipo": "banco", "nombre": "Banco de Galicia y Buenos Aires", "fuente": "BCRA (sin confirmar)", "pendiente": true },
-    { "codigo": "011", "tipo": "banco", "nombre": "Banco de la Nación Argentina", "fuente": "BCRA (sin confirmar)", "pendiente": true },
-    { "codigo": "014", "tipo": "banco", "nombre": "Banco de la Provincia de Buenos Aires", "fuente": "BCRA (sin confirmar)", "pendiente": true },
-    { "codigo": "072", "tipo": "banco", "nombre": "Banco Santander Argentina", "fuente": "BCRA (sin confirmar)", "pendiente": true },
-    { "codigo": "285", "tipo": "banco", "nombre": "Banco Macro", "fuente": "BCRA (sin confirmar)", "pendiente": true }
+    {
+      "codigo": "007",
+      "tipo": "banco",
+      "nombre": "BANCO DE GALICIA Y BUENOS AIRES S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "011",
+      "tipo": "banco",
+      "nombre": "BANCO DE LA NACION ARGENTINA",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "014",
+      "tipo": "banco",
+      "nombre": "BANCO DE LA PROVINCIA DE BUENOS AIRES",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "015",
+      "tipo": "banco",
+      "nombre": "INDUSTRIAL AND COMMERCIAL BANK OF CHINA",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "016",
+      "tipo": "banco",
+      "nombre": "CITIBANK N.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "017",
+      "tipo": "banco",
+      "nombre": "BANCO BBVA ARGENTINA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "020",
+      "tipo": "banco",
+      "nombre": "BANCO DE LA PROVINCIA DE CORDOBA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "027",
+      "tipo": "banco",
+      "nombre": "BANCO SUPERVIELLE S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "029",
+      "tipo": "banco",
+      "nombre": "BANCO DE LA CIUDAD DE BUENOS AIRES",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "034",
+      "tipo": "banco",
+      "nombre": "BANCO PATAGONIA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "044",
+      "tipo": "banco",
+      "nombre": "BANCO HIPOTECARIO S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "045",
+      "tipo": "banco",
+      "nombre": "BANCO DE SAN JUAN S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "065",
+      "tipo": "banco",
+      "nombre": "BANCO MUNICIPAL DE ROSARIO",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "072",
+      "tipo": "banco",
+      "nombre": "BANCO SANTANDER ARGENTINA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "083",
+      "tipo": "banco",
+      "nombre": "BANCO DEL CHUBUT S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "086",
+      "tipo": "banco",
+      "nombre": "BANCO DE SANTA CRUZ S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "093",
+      "tipo": "banco",
+      "nombre": "BANCO DE LA PAMPA SA",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "094",
+      "tipo": "banco",
+      "nombre": "BANCO DE CORRIENTES S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "097",
+      "tipo": "banco",
+      "nombre": "BANCO PROVINCIA DEL NEUQUÉN SOCIEDAD ANÓ",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "131",
+      "tipo": "banco",
+      "nombre": "BANK OF CHINA LIMITED SUCURSAL BUENOS AI",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "143",
+      "tipo": "banco",
+      "nombre": "BRUBANK S.A.U.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "147",
+      "tipo": "banco",
+      "nombre": "BIBANK S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "165",
+      "tipo": "banco",
+      "nombre": "JPMORGAN CHASE BANK, NATIONAL ASSOCIATIO",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "191",
+      "tipo": "banco",
+      "nombre": "BANCO CREDICOOP COOPERATIVO LIMITADO",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "198",
+      "tipo": "banco",
+      "nombre": "BANCO DE VALORES S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "247",
+      "tipo": "banco",
+      "nombre": "BANCO ROELA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "254",
+      "tipo": "banco",
+      "nombre": "BANCO MARIVA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "266",
+      "tipo": "banco",
+      "nombre": "BNP PARIBAS",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "268",
+      "tipo": "banco",
+      "nombre": "BANCO PROVINCIA DE TIERRA DEL FUEGO",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "269",
+      "tipo": "banco",
+      "nombre": "BANCO DE LA REPUBLICA ORIENTAL DEL URUGU",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "277",
+      "tipo": "banco",
+      "nombre": "BANCO SAENZ S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "281",
+      "tipo": "banco",
+      "nombre": "BANCO MERIDIAN S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "285",
+      "tipo": "banco",
+      "nombre": "BANCO MACRO S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "299",
+      "tipo": "banco",
+      "nombre": "BANCO COMAFI SOCIEDAD ANONIMA",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "300",
+      "tipo": "banco",
+      "nombre": "BANCO DE INVERSION Y COMERCIO EXTERIOR S",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "301",
+      "tipo": "banco",
+      "nombre": "BANCO PIANO S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "305",
+      "tipo": "banco",
+      "nombre": "BANCO JULIO SOCIEDAD ANONIMA",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "309",
+      "tipo": "banco",
+      "nombre": "BANCO RIOJA SOCIEDAD ANONIMA UNIPERSONAL",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "310",
+      "tipo": "banco",
+      "nombre": "BANCO DEL SOL S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "311",
+      "tipo": "banco",
+      "nombre": "NUEVO BANCO DEL CHACO S. A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "312",
+      "tipo": "banco",
+      "nombre": "BANCO VOII S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "315",
+      "tipo": "banco",
+      "nombre": "BANCO DE FORMOSA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "319",
+      "tipo": "banco",
+      "nombre": "BANCO CMF S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "321",
+      "tipo": "banco",
+      "nombre": "BANCO DE SANTIAGO DEL ESTERO S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "322",
+      "tipo": "banco",
+      "nombre": "BANCO INDUSTRIAL S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "330",
+      "tipo": "banco",
+      "nombre": "NUEVO BANCO DE SANTA FE SOCIEDAD ANONIMA",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "331",
+      "tipo": "banco",
+      "nombre": "BANCO CETELEM ARGENTINA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "332",
+      "tipo": "banco",
+      "nombre": "BANCO DE SERVICIOS FINANCIEROS CARREFOUR",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "338",
+      "tipo": "banco",
+      "nombre": "BANCO DE SERVICIOS Y TRANSACCIONES SAU",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "339",
+      "tipo": "banco",
+      "nombre": "RCI BANQUE S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "340",
+      "tipo": "banco",
+      "nombre": "BACS BANCO DE CREDITO Y SECURITIZACION S",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "341",
+      "tipo": "banco",
+      "nombre": "BANCO MASVENTAS S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "384",
+      "tipo": "banco",
+      "nombre": "UALA BANK S.A.U.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "386",
+      "tipo": "banco",
+      "nombre": "NUEVO BANCO DE ENTRE RÍOS S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "389",
+      "tipo": "banco",
+      "nombre": "BANCO COLUMBIA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "426",
+      "tipo": "banco",
+      "nombre": "BANCO BICA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "431",
+      "tipo": "banco",
+      "nombre": "BANCO COINAG S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "432",
+      "tipo": "banco",
+      "nombre": "BANCO DE COMERCIO S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "435",
+      "tipo": "banco",
+      "nombre": "BANCO SUCREDITO REGIONAL S.A.U.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "448",
+      "tipo": "banco",
+      "nombre": "BANCO DINO S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": false
+    },
+    {
+      "codigo": "44077",
+      "tipo": "compania_financiera",
+      "nombre": "COMPAÑIA FINANCIERA ARGENTINA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44088",
+      "tipo": "compania_financiera",
+      "nombre": "VOLKSWAGEN FINANCIAL SERVICES COMPAÑIA F",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44092",
+      "tipo": "compania_financiera",
+      "nombre": "FCA COMPAÑIA FINANCIERA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44093",
+      "tipo": "compania_financiera",
+      "nombre": "GPAT COMPAÑIA FINANCIERA S.A.U.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44094",
+      "tipo": "compania_financiera",
+      "nombre": "MERCEDES-BENZ COMPAÑÍA FINANCIERA ARGENT",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44095",
+      "tipo": "compania_financiera",
+      "nombre": "ROMBO COMPAÑÍA FINANCIERA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44096",
+      "tipo": "compania_financiera",
+      "nombre": "JOHN DEERE CREDIT COMPAÑÍA FINANCIERA S.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44098",
+      "tipo": "compania_financiera",
+      "nombre": "PSA FINANCE ARGENTINA COMPAÑÍA FINANCIER",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "44099",
+      "tipo": "compania_financiera",
+      "nombre": "TOYOTA COMPAÑÍA FINANCIERA DE ARGENTINA",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "45030",
+      "tipo": "compania_financiera",
+      "nombre": "NARANJA DIGITAL COMPAÑÍA FINANCIERA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "45056",
+      "tipo": "compania_financiera",
+      "nombre": "MONTEMAR COMPAÑIA FINANCIERA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "45072",
+      "tipo": "compania_financiera",
+      "nombre": "REBA COMPAÑIA FINANCIERA S.A.",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "65203",
+      "tipo": "compania_financiera",
+      "nombre": "CRÉDITO REGIONAL COMPAÑÍA FINANCIERA S.A",
+      "fuente": "Listado de entidades (BCRA) pasado por Alberto",
+      "pendiente": true
+    },
+    {
+      "codigo": "00000031",
+      "tipo": "cvu",
+      "nombre": "Mercado Pago",
+      "fuente": "comprobantes reales (Mercado Pago y Galicia Office Banking)",
+      "pendiente": true
+    },
+    {
+      "codigo": "00000468",
+      "tipo": "cvu",
+      "nombre": "Pago Virtual del Sur",
+      "fuente": "comprobantes reales (Supervielle, Mercado Pago, Ualá, Lemon)",
+      "pendiente": true
+    }
   ]
 }

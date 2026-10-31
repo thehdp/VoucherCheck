@@ -25,3 +25,6 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 
 - El "ID Coelsa" / "COELSA ID" no se usa como `nro_operacion` en ningún banco ni app.
 - Comprobante tipo "Finalizada" (banco sin identificar): `nro_operacion` = "Nro. de operación".
+
+### Depósitos: pendiente de aclarar
+Alberto dijo primero `"DEPOSITANTE"` y después `"DEPOSITO"` como valor de `ordenante` en depósitos de Galicia. Hasta que lo aclare queda `"DEPOSITANTE"`.
