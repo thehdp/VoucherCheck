@@ -525,6 +525,13 @@
       "nombre": "Pago Virtual del Sur",
       "fuente": "comprobantes reales (Supervielle, Mercado Pago, Ualá, Lemon)",
       "pendiente": true
+    },
+    {
+      "codigo": "00002907",
+      "tipo": "cvu",
+      "nombre": "NEW FINANCE",
+      "fuente": "App bancaria de Alberto: al copiar el CVU 0000290700000000020972 muestra NEW FINANCE",
+      "pendiente": false
     }
   ]
 }

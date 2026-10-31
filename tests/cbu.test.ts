@@ -48,5 +48,10 @@ describe("buscarEntidad (tabla BCRA)", () => {
   it("CVU de proveedor pendiente no se da por confirmado", () => {
     expect(buscarEntidad("0000003100043103826391")?.pendiente).toBe(true);
   });
-  it("CVU desconocido → null", () => expect(buscarEntidad("0000290700000000020972")).toBeNull());
+  it("CVU de New Finance (confirmado por Alberto en su app)", () => {
+    const e = buscarEntidad("0000290700000000020972");
+    expect(e?.nombre).toBe("NEW FINANCE");
+    expect(e?.pendiente).toBe(false);
+  });
+  it("CVU desconocido → null", () => expect(buscarEntidad("0000999900000000000000")).toBeNull());
 });
