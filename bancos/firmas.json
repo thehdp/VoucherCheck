@@ -6,6 +6,7 @@
     { "banco": "lemon", "frases": ["powered by digifin"] },
     { "banco": "uala", "frases": ["id. op.", "cbu emisor"] },
     { "banco": "mercadopago", "frases": ["operacion de mercado pago"] },
+    { "banco": "icbc", "frases": ["nro de movimiento"] },
     { "banco": "newfinance", "frases": ["id coelsa", "1d coelsa"] }
   ]
 }

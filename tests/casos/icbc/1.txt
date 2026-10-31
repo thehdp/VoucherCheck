@@ -1,0 +1,32 @@
+Rubro Tipo y número de cuenta Importe
+ENZO RODRIGO ZANEL CC $ 0827/02105356/90 $ -794.000,00
+Concepto Fecha Nro de movimiento
+DEBITO INMEDIATO20174137235  22-Oct-2026 34822
+Detalle
+
+Centro de costos Fecha / Hora operación
+
+0827 SUC RECONQUISTA 22-Oct-2026 13:07
+
+Fecha valor Fecha / Hora origen
+
+22-Oct-2026 22-Oct-2026 13:07
+
+Fecha contable Código de movimiento
+22-Oct-2026 990
+
+Número de ticket Banco
+
+DBTO CREDIN 0015
+
+Detalle de transferencia
+
+Canal operación Banco
+
+BUSSINESS SERVER -
+
+CVU/Allas Nombre
+0000003100043103826391 OSCAR ENRIQUE MAGNANEGO
+Tipo de documento Número de documento
+
+cuIT 20-17413723-5

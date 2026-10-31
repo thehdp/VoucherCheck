@@ -1,10 +1,10 @@
 {
   "ok": true,
-  "estado": "no_leido",
+  "estado": "completo",
   "banco_emisor": "Banco Galicia",
   "monto": 83000,
   "moneda": "ARS",
-  "fecha": null,
+  "fecha": "2026-10-16",
   "hora": "13:49",
   "nro_operacion": "008405022610160160761",
   "ordenante": "DEPOSITO",
@@ -17,6 +17,6 @@
   "destinatario": "MAGNANEGO OSCAR ENRIQUE",
   "concepto": null,
   "advertencias": [
-    "Faltan campos obligatorios: fecha"
+    "Fecha tomada del número de operación (el OCR no pudo leerla del ticket)"
   ]
 }

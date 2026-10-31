@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "estado": "completo",
+  "banco_emisor": "ICBC",
+  "monto": 794000,
+  "moneda": "ARS",
+  "fecha": "2026-10-22",
+  "hora": "13:07",
+  "nro_operacion": "34822",
+  "ordenante": "ENZO RODRIGO ZANEL",
+  "cuit_ordenante": null,
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": "0000003100043103826391",
+  "banco_destino": "Mercado Pago",
+  "alias_destino": null,
+  "destinatario": "OSCAR ENRIQUE MAGNANEGO",
+  "concepto": "DEBITO INMEDIATO",
+  "advertencias": []
+}

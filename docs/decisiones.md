@@ -28,3 +28,8 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 
 ### Depósitos: confirmado
 `ordenante` = `"DEPOSITO"` (confirmado por Alberto, reemplaza a "DEPOSITANTE").
+
+## Reglas confirmadas en la fase 2
+- **ICBC:** el importe viene negativo (`$ -794.000,00`) pero es positivo: se guarda el valor absoluto. `nro_operacion` = "Nro de movimiento". `banco_emisor` = "ICBC" (código 015 en la lista del BCRA). El comprobante se probó solo como imagen (OCR); si llega como PDF puede cambiar el orden del texto y hay que ajustar con un caso real.
+- **Depósitos de Galicia:** si el OCR no lee la fecha del ticket, se toma del número de operación (dígitos 9 a 14 = AAMMDD) y se agrega una advertencia. Si ambas fechas existen y no coinciden, se avisa.
+- **Proveedores CVU:** Mercado Pago, Pago Virtual del Sur y New Finance quedan confirmados por Alberto; si alguno estuviera mal, se corrige en `datos/bancos-cbu.json`.

@@ -17,7 +17,7 @@ describe("normalizarMonto", () => {
 });
 
 describe("normalizarFecha", () => {
-  it.each(["30/10/2026", "30-10-26", "30 oct 2026", "30 de octubre de 2026", "30.10.2026"])("%s", (f) =>
+  it.each(["30/10/2026", "30-10-26", "30 oct 2026", "30 de octubre de 2026", "30.10.2026", "30/octubre/2026", "30-Oct-2026"])("%s", (f) =>
     expect(normalizarFecha(f)).toBe("2026-10-30"));
   it("rechaza fechas imposibles", () => expect(normalizarFecha("31/02/2026")).toBeNull());
 });

@@ -38,9 +38,19 @@ function parsearDeposito(texto: string) {
   const limpio = op ? corregirNumerico(op) : null;
   const nro = limpio && /^\d{21}$/.test(limpio) ? limpio : null;
   const titular = texto.match(/[Tt1l]itular\s+((?:[A-ZÁÉÍÓÚÑ]{2,}(?:[ \t]|$))+)/m)?.[1];
+  let fecha = normalizarFecha(texto.match(/\d{2}\/\d{2}\/\d{4}/)?.[0]);
+  const avisos: string[] = [];
+  // Los dígitos 9 a 14 del número de operación son la fecha (AAMMDD): 007605042610160092008 → 2026-10-16
+  const fechaOp = nro ? normalizarFecha(`${nro.slice(12, 14)}/${nro.slice(10, 12)}/${nro.slice(8, 10)}`) : null;
+  if (fecha && fechaOp && fecha !== fechaOp) avisos.push("La fecha del ticket no coincide con la del número de operación");
+  if (!fecha && fechaOp) {
+    fecha = fechaOp;
+    avisos.push("Fecha tomada del número de operación (el OCR no pudo leerla del ticket)");
+  }
   return {
+    advertencias: avisos,
     monto: normalizarMonto(texto.match(/mporte\s*\$?\s*([\d.,]+)/i)?.[1]),
-    fecha: normalizarFecha(texto.match(/\d{2}\/\d{2}\/\d{4}/)?.[0]),
+    fecha,
     hora: normalizarHora(texto.match(/\b(\d{2}:\d{2}):?\d{0,2}/)?.[0]),
     nro_operacion: nro,
     ordenante: "DEPOSITO",
