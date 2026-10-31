@@ -2,6 +2,7 @@ import { validarClave } from "@/lib/auth";
 import { textoDeImagen } from "@/lib/extraer/ocr";
 import { textoDePdf } from "@/lib/extraer/pdf";
 import { leerTexto } from "@/lib/leer";
+import { registrarLectura } from "@/lib/registro";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -36,6 +37,7 @@ export async function POST(req: Request) {
     // Sin datos personales en logs: solo la app y el estado.
     const resultado = leerTexto(texto);
     console.log(JSON.stringify({ app, estado: resultado.estado, banco: resultado.banco_emisor }));
+    await registrarLectura(app, esPdf ? "pdf" : "imagen", resultado, texto);
     return Response.json(resultado);
   } catch {
     return error(500, "error_interno", "Error interno al leer el comprobante");

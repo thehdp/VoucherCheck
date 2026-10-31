@@ -33,3 +33,8 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - **ICBC:** el importe viene negativo (`$ -794.000,00`) pero es positivo: se guarda el valor absoluto. `nro_operacion` = "Nro de movimiento". `banco_emisor` = "ICBC" (código 015 en la lista del BCRA). El comprobante se probó solo como imagen (OCR); si llega como PDF puede cambiar el orden del texto y hay que ajustar con un caso real.
 - **Depósitos de Galicia:** si el OCR no lee la fecha del ticket, se toma del número de operación (dígitos 9 a 14 = AAMMDD) y se agrega una advertencia. Si ambas fechas existen y no coinciden, se avisa.
 - **Proveedores CVU:** Mercado Pago, Pago Virtual del Sur y New Finance quedan confirmados por Alberto; si alguno estuviera mal, se corrige en `datos/bancos-cbu.json`.
+
+## Fase 3 (registro)
+- Neon guarda `lecturas` (todas) y `no_leidos` (las que no quedan `completo`, con el texto extraído). Sin Blob ni archivos.
+- `/no-leidos`: Basic Auth (usuario `admin`, clave en `ADMIN_PASSWORD`). "Marcar como resuelto" borra el texto extraído.
+- Si no hay `DATABASE_URL` o falla la base, el lector sigue respondiendo y no registra.
