@@ -17,7 +17,7 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 |---|---|
 | Supervielle (PDF) | `nro_operacion` = "Número de control". El monto pierde la coma: `$ 1.500.00000` = 1.500.000,00 (últimos 2 dígitos = centavos). |
 | Galicia Office Banking (PDF) | Firma: "office banking". `nro_operacion` = "Identificador de la operación". `hora` null (la del PDF es de impresión). |
-| Galicia, depósito en efectivo (ticket de cajero, imagen) | `nro_operacion` = los 21 dígitos de "Nro Operacion", **sin** el dígito de "Estado" que baja a la línea siguiente. `ordenante` = `"DEPOSITANTE"` (los depósitos no traen ordenante). El titular de la cuenta va como `destinatario`. Sin CBU. |
+| Galicia, depósito en efectivo (ticket de cajero, imagen) | `nro_operacion` = los 21 dígitos de "Nro Operacion", **sin** el dígito de "Estado" que baja a la línea siguiente. `ordenante` = `"DEPOSITO"` (los depósitos no traen ordenante). El titular de la cuenta va como `destinatario`. Sin CBU. |
 | Lemon (imagen) | `nro_operacion` = "ID de la transacción" (no el "COELSA ID"). |
 | Ualá (imagen) | `nro_operacion` = "Id. Op.". |
 
@@ -26,5 +26,5 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - El "ID Coelsa" / "COELSA ID" no se usa como `nro_operacion` en ningún banco ni app.
 - Comprobante tipo "Finalizada" (banco sin identificar): `nro_operacion` = "Nro. de operación".
 
-### Depósitos: pendiente de aclarar
-Alberto dijo primero `"DEPOSITANTE"` y después `"DEPOSITO"` como valor de `ordenante` en depósitos de Galicia. Hasta que lo aclare queda `"DEPOSITANTE"`.
+### Depósitos: confirmado
+`ordenante` = `"DEPOSITO"` (confirmado por Alberto, reemplaza a "DEPOSITANTE").
