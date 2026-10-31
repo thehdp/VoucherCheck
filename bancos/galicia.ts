@@ -1,5 +1,5 @@
 import type { Parser } from "@/lib/tipos";
-import { limpiarEspacios, normalizarCuit, normalizarFecha, normalizarMonto } from "@/lib/normalizar";
+import { corregirNumerico, limpiarEspacios, normalizarCuit, normalizarFecha, normalizarHora, normalizarMonto } from "@/lib/normalizar";
 
 /**
  * Galicia Office Banking (comprobante de transferencia a proveedores).
@@ -9,6 +9,7 @@ import { limpiarEspacios, normalizarCuit, normalizarFecha, normalizarMonto } fro
 export const galicia: Parser = {
   nombre: "Banco Galicia",
   parsear(texto) {
+    if (/dep[oó]sito en efectivo/i.test(texto)) return parsearDeposito(texto);
     const pagador = texto.match(/Datos del pagador[\s\S]*?\n(\d{11})\s+([^\n]+)/);
     const dest = texto.match(/Datos del destinatario[\s\S]*?\n(\d{11})\s+([^\n]+)/);
     const concepto = texto.match(/Concepto Descripci[oó]n\s*\n\s*(\S[^\n]*?)\s+-?\s*\n/)?.[1];
@@ -24,3 +25,25 @@ export const galicia: Parser = {
     };
   },
 };
+
+/**
+ * Ticket de cajero "DEPOSITO EN EFECTIVO" (foto → OCR).
+ * - nro_operacion: los 21 dígitos de "Nro Operacion", SIN el dígito de "Estado" (confirmado por Alberto).
+ * - ordenante: "DEPOSITO" (los depósitos no traen ordenante).
+ * - destinatario: el titular de la cuenta. Sin CBU.
+ * Si el OCR no deja 21 dígitos limpios, nro_operacion queda null con advertencia: no se adivina.
+ */
+function parsearDeposito(texto: string) {
+  const op = texto.match(/Nro\.?\s*Operaci[oó]n\s+(\S+)/i)?.[1];
+  const limpio = op ? corregirNumerico(op) : null;
+  const nro = limpio && /^\d{21}$/.test(limpio) ? limpio : null;
+  const titular = texto.match(/[Tt1l]itular\s+((?:[A-ZÁÉÍÓÚÑ]{2,}(?:[ \t]|$))+)/m)?.[1];
+  return {
+    monto: normalizarMonto(texto.match(/mporte\s*\$?\s*([\d.,]+)/i)?.[1]),
+    fecha: normalizarFecha(texto.match(/\d{2}\/\d{2}\/\d{4}/)?.[0]),
+    hora: normalizarHora(texto.match(/\b(\d{2}:\d{2}):?\d{0,2}/)?.[0]),
+    nro_operacion: nro,
+    ordenante: "DEPOSITO",
+    destinatario: limpiarEspacios(titular),
+  };
+}

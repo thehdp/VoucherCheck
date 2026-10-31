@@ -1,0 +1,35 @@
+: BANCO GALICIA Ya
+; Fecha Hora Terminal E
+19/10/2026 11:51113 501 Ml
+y Sucursal : 143 - CATAMARCA BS
+S RIVADAVIA 554 SN
+S DEPOSITO EN EFECTIVO S
+| Deposito en CA$ 4005876-X XX0/4 a
+Í Titular MAGNANEGO OSCAR ENRIQUE %
+Í Importe $ 1.805.000,00P
+Í Nro Operacion 014305012610190177802 Py
+i Estado: 3
+; Deposito confirmado S
+: E SUELUTO RON %
+COM.A 5943 BCRA CIRC OPASI 2-490
+| Los depósitos en pesos y_ en moneda E
+de cuentan con la garantlak
+de hasta $ 50.000.000. En las
+Í operaciones a nombre de dos o Mask
+personas, la garantía se prorratearag
+il entre sus titulares. En ningun caso,
+el total de la garantía por personas
+y por depósito podrá exceder de  $f
+| 50.000.000, cualquiera sea el numero
+de cuentas y/o depósitos. Ley E
+24,485, Decreto NO 540/95 * YM
+il modificatorios y Com. "A" 8407 YW
+Y sus modificatorias y comple >
+Se encuentran excluidos los captadosY
+- E tasas superiores a la def
+Y referencia conforme a los límitesg
+| establecidos por el Banco Central,Kk
+los adquiridos por endoso y loss
+efectuados por personas vinculadas a
+la entidad financiera.
+l9a51ceb-3109-4253-958f-52087d6ea0f6 :

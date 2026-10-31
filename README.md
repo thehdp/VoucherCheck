@@ -8,4 +8,4 @@ Servidor Next.js (Vercel, Node) que lee comprobantes de transferencias argentina
 
 Solo se guardan datos, nunca archivos (ver `docs/decisiones.md`).
 
-Estado: **Fase 1** (PDF + validación de CBU + tabla CBU + Supervielle y Galicia). Pendiente de la tabla CBU: cargar el listado oficial del BCRA.
+Estado: **Fase 2** (OCR de imágenes con sharp + tesseract.js). Bancos: Supervielle, Galicia (PDF y depósito), Mercado Pago, Ualá, Lemon, New Finance. Pendiente: ICBC.

@@ -45,8 +45,10 @@ describe("buscarEntidad (tabla BCRA)", () => {
     expect(buscarEntidad("0270065620057590300025")?.nombre).toBe("BANCO SUPERVIELLE S.A.");
     expect(buscarEntidad("3840200500000033928869")?.nombre).toBe("UALA BANK S.A.U.");
   });
-  it("CVU de proveedor pendiente no se da por confirmado", () => {
-    expect(buscarEntidad("0000003100043103826391")?.pendiente).toBe(true);
+  it("CVU de Mercado Pago (confirmado por Alberto)", () => {
+    const e = buscarEntidad("0000003100043103826391");
+    expect(e?.nombre).toBe("Mercado Pago");
+    expect(e?.pendiente).toBe(false);
   });
   it("CVU de New Finance (confirmado por Alberto en su app)", () => {
     const e = buscarEntidad("0000290700000000020972");

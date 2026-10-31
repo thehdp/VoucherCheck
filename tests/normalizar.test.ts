@@ -9,6 +9,9 @@ describe("normalizarMonto", () => {
     ["15,000.50", 15000.5],
     ["1.234.567,89", 1234567.89],
     ["$ 0,99", 0.99],
+    ["$ 1.102.995", 1102995],
+    ["$57.121", 57121],
+    ["15.5", 15.5],
   ])("%s", (e, n) => expect(normalizarMonto(e)).toBe(n));
   it("devuelve null si no hay número", () => expect(normalizarMonto("abc")).toBeNull());
 });

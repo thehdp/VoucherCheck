@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "estado": "completo",
+  "banco_emisor": "Lemon",
+  "monto": 107000,
+  "moneda": "ARS",
+  "fecha": "2026-10-15",
+  "hora": "12:45",
+  "nro_operacion": "593f82b4-381a-484b-85f1-fe8c9a61d1d8",
+  "ordenante": "Barbara Sol Olivares",
+  "cuit_ordenante": null,
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": "0000046800000159185229",
+  "banco_destino": "Pago Virtual del Sur",
+  "alias_destino": null,
+  "destinatario": "Prestigio Pagos S.a.",
+  "concepto": "Varios",
+  "advertencias": []
+}

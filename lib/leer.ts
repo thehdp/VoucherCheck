@@ -13,7 +13,9 @@ export function leerTexto(texto: string): Lectura {
   if (!clave) out.advertencias.push("No se pudo identificar el banco emisor");
 
   const datos = (parser ?? generico).parsear(texto);
-  Object.assign(out, datos);
+  const { advertencias: avisosParser = [], ...campos } = datos;
+  Object.assign(out, campos);
+  out.advertencias.push(...avisosParser);
   if (parser) out.banco_emisor = datos.banco_emisor ?? parser.nombre;
   if (out.monto !== null && !out.moneda) out.moneda = "ARS";
 
@@ -30,11 +32,19 @@ export function leerTexto(texto: string): Lectura {
     else out[`banco_${lado}`] = e.nombre;
   }
 
+  // Un número de operación con largo raro casi seguro es un error de OCR: se avisa, no se corrige.
+  if (out.banco_emisor === "New Finance" && out.nro_operacion && !/^[0-9a-f]{32}$/.test(out.nro_operacion)) {
+    out.advertencias.push("nro_operacion con largo inesperado (posible error de OCR)");
+  }
+  if (out.banco_emisor === "Banco Galicia" && out.ordenante === "DEPOSITO" && out.nro_operacion === null) {
+    out.advertencias.push("nro_operacion del depósito ilegible (posible error de OCR)");
+  }
+
   const faltan = CAMPOS_OBLIGATORIOS.filter((c) => out[c] === null);
   if (faltan.length) {
     out.estado = "no_leido";
     out.advertencias.push(`Faltan campos obligatorios: ${faltan.join(", ")}`);
-  } else if (out.advertencias.some((a) => a.includes("no valida"))) {
+  } else if (out.advertencias.some((a) => a.includes("no valida") || a.includes("posible error de OCR"))) {
     out.estado = "parcial";
   } else {
     out.estado = "completo";

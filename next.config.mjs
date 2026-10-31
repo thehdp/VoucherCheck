@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ["unpdf"],
+  // Paquetes con binarios/workers: no se empaquetan, se cargan desde node_modules
+  serverExternalPackages: ["unpdf", "sharp", "tesseract.js", "tesseract.js-core"],
+  // El idioma del OCR y el motor wasm tienen que viajar con la función de Vercel
+  outputFileTracingIncludes: {
+    "/api/leer": ["./ocr/**/*", "./node_modules/tesseract.js-core/**/*", "./node_modules/tesseract.js/src/**/*"],
+  },
 };
 export default nextConfig;

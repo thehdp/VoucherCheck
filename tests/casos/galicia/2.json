@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "estado": "no_leido",
+  "banco_emisor": "Banco Galicia",
+  "monto": 1081500,
+  "moneda": "ARS",
+  "fecha": "2026-10-16",
+  "hora": "09:14",
+  "nro_operacion": null,
+  "ordenante": "DEPOSITO",
+  "cuit_ordenante": null,
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": null,
+  "banco_destino": null,
+  "alias_destino": null,
+  "destinatario": "MAGNANEGO OSCAR ENRIQUE",
+  "concepto": null,
+  "advertencias": [
+    "nro_operacion del depósito ilegible (posible error de OCR)",
+    "Faltan campos obligatorios: nro_operacion"
+  ]
+}

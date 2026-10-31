@@ -22,7 +22,10 @@ export interface Lectura {
 }
 
 /** Lo que devuelve cada parser de banco (antes de normalizar CBU y estado). */
-export type DatosParseados = Partial<Omit<Lectura, "ok" | "estado" | "advertencias">>;
+export type DatosParseados = Partial<Omit<Lectura, "ok" | "estado" | "advertencias">> & {
+  /** Problemas que el parser detectó al leer (ej: un campo ilegible por el OCR). */
+  advertencias?: string[];
+};
 
 export interface Parser {
   /** Nombre del banco emisor tal como sale en la respuesta. */

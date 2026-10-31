@@ -12,11 +12,9 @@
   "cbu_origen": null,
   "banco_origen": null,
   "cbu_destino": "0000003100043103826391",
-  "banco_destino": null,
+  "banco_destino": "Mercado Pago",
   "alias_destino": null,
   "destinatario": "Oscar Enrique Magnanego",
   "concepto": "Varios",
-  "advertencias": [
-    "CBU destino: entidad Mercado Pago pendiente de confirmar, no se completa el banco"
-  ]
+  "advertencias": []
 }

@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "estado": "parcial",
+  "banco_emisor": "New Finance",
+  "monto": 967200,
+  "moneda": "ARS",
+  "fecha": "2026-10-20",
+  "hora": "16:55",
+  "nro_operacion": "bf105f6c00eee4fd7a9063593be4ad87c",
+  "ordenante": "TIMECLOCK S.A",
+  "cuit_ordenante": "30719042852",
+  "cbu_origen": "0000290700000000020972",
+  "banco_origen": "NEW FINANCE",
+  "cbu_destino": "0000046800000159185229",
+  "banco_destino": "Pago Virtual del Sur",
+  "alias_destino": null,
+  "destinatario": "PRESTIGIO PAGOS S.A.",
+  "concepto": "Varios",
+  "advertencias": [
+    "nro_operacion con largo inesperado (posible error de OCR)"
+  ]
+}

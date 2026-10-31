@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "estado": "no_leido",
+  "banco_emisor": "Banco Galicia",
+  "monto": 83000,
+  "moneda": "ARS",
+  "fecha": null,
+  "hora": "13:49",
+  "nro_operacion": "008405022610160160761",
+  "ordenante": "DEPOSITO",
+  "cuit_ordenante": null,
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": null,
+  "banco_destino": null,
+  "alias_destino": null,
+  "destinatario": "MAGNANEGO OSCAR ENRIQUE",
+  "concepto": null,
+  "advertencias": [
+    "Faltan campos obligatorios: fecha"
+  ]
+}

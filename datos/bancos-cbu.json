@@ -516,15 +516,15 @@
       "codigo": "00000031",
       "tipo": "cvu",
       "nombre": "Mercado Pago",
-      "fuente": "comprobantes reales (Mercado Pago y Galicia Office Banking)",
-      "pendiente": true
+      "fuente": "comprobantes reales (Mercado Pago y Galicia Office Banking) · confirmado por Alberto como válido hasta que se corrija",
+      "pendiente": false
     },
     {
       "codigo": "00000468",
       "tipo": "cvu",
       "nombre": "Pago Virtual del Sur",
-      "fuente": "comprobantes reales (Supervielle, Mercado Pago, Ualá, Lemon)",
-      "pendiente": true
+      "fuente": "comprobantes reales (Supervielle, Mercado Pago, Ualá, Lemon) · confirmado por Alberto como válido hasta que se corrija",
+      "pendiente": false
     },
     {
       "codigo": "00002907",

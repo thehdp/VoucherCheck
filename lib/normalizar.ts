@@ -24,11 +24,11 @@ export function normalizarMonto(crudo: string | null | undefined): number | null
   } else if (ultComa >= 0) {
     // "1,5" / "15000,50" es decimal; "1,500" con exactamente 3 dígitos y una sola coma es miles
     const despues = s.length - ultComa - 1;
-    decimal = despues === 3 && s.indexOf(",") === ultComa ? null : ",";
+    decimal = despues === 3 || s.indexOf(",") !== ultComa ? null : ",";
   } else if (ultPunto >= 0) {
     const despues = s.length - ultPunto - 1;
     // "15.000" es miles; "15000.50" o "15.5" es decimal
-    decimal = despues === 3 && s.indexOf(".") === ultPunto ? null : ".";
+    decimal = despues === 3 || s.indexOf(".") !== ultPunto ? null : ".";
   }
   let entero = s;
   let frac = "";
@@ -46,7 +46,8 @@ export function normalizarMonto(crudo: string | null | undefined): number | null
 /** "30/10/2026", "30-10-26", "30 oct 2026", "30 de octubre de 2026" → "2026-10-30". */
 export function normalizarFecha(crudo: string | null | undefined): string | null {
   if (!crudo) return null;
-  const t = crudo.toLowerCase().trim();
+  // "30/octubre/2026" → "30 octubre 2026"
+  const t = crudo.toLowerCase().trim().replace(/(\d)\/([a-záéíóú]+)\/(\d)/, "$1 $2 $3");
   let d: number, m: number, a: number;
   let r = t.match(/(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4}|\d{2})\b/);
   if (r) {
@@ -100,4 +101,25 @@ export function limpiarEspacios(s: string | null | undefined): string | null {
   if (!s) return null;
   const t = s.replace(/\s+/g, " ").trim();
   return t || null;
+}
+
+/**
+ * Saca un CBU/CVU de 22 dígitos de un texto de OCR: acepta O/l/I/S/B donde va un dígito
+ * (solo dentro de un bloque de 22 caracteres) y los corrige. Devuelve null si no hay.
+ */
+export function cbuDeOcr(texto: string | null | undefined): string | null {
+  if (!texto) return null;
+  const m = texto.match(/(?<![0-9A-Za-z])[0-9OoIlSB]{22}(?![0-9A-Za-z])/);
+  return m ? corregirNumerico(m[0]) : null;
+}
+
+/** Quita basura de OCR al inicio de un nombre (íconos leídos como "<S", "»=", etc.). */
+export function limpiarNombre(s: string | null | undefined): string | null {
+  const t = limpiarEspacios(s);
+  if (!t) return null;
+  const tokens = t.split(" ");
+  while (tokens.length > 1 && (!/\p{L}/u.test(tokens[0]) || (tokens[0].length <= 2 && /[^\p{L}]/u.test(tokens[0])))) {
+    tokens.shift();
+  }
+  return tokens.join(" ");
 }
