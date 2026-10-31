@@ -1,4 +1,7 @@
 {
-  "_nota": "Frases que identifican al banco emisor (en minúsculas, sin tildes). Se agregan a medida que llegan comprobantes reales: no inventar firmas.",
-  "bancos": []
+  "_nota": "Frases que identifican al banco emisor (se comparan sin tildes y en minúsculas). Solo frases vistas en comprobantes reales: no inventar firmas.",
+  "bancos": [
+    { "banco": "supervielle", "frases": ["supervielle\ntransferencia a otra cuenta"] },
+    { "banco": "galicia", "frases": ["office banking"] }
+  ]
 }

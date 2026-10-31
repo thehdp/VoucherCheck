@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "estado": "completo",
+  "banco_emisor": "Banco Galicia",
+  "monto": 1101585,
+  "moneda": "ARS",
+  "fecha": "2026-10-20",
+  "hora": null,
+  "nro_operacion": "LRALGWF343",
+  "ordenante": "VELV SA",
+  "cuit_ordenante": "30719016592",
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": "0000003100043103826391",
+  "banco_destino": null,
+  "alias_destino": null,
+  "destinatario": "Oscar Enrique Magnanego",
+  "concepto": "Varios",
+  "advertencias": [
+    "CBU destino: entidad no encontrada en la tabla"
+  ]
+}

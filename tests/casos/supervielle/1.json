@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "estado": "completo",
+  "banco_emisor": "Banco Supervielle",
+  "monto": 1500000,
+  "moneda": "ARS",
+  "fecha": "2026-10-30",
+  "hora": "22:53",
+  "nro_operacion": "PDX4OGNY4EJKK5OV20L6EY",
+  "ordenante": "Daniel Alberto Argañaraz",
+  "cuit_ordenante": "20129183617",
+  "cbu_origen": "0270065620057590300025",
+  "banco_origen": null,
+  "cbu_destino": "0000046800000159185229",
+  "banco_destino": null,
+  "alias_destino": null,
+  "destinatario": "Prestigio Pagos S.a.",
+  "concepto": null,
+  "advertencias": [
+    "CBU origen: entidad no encontrada en la tabla",
+    "CBU destino: entidad no encontrada en la tabla"
+  ]
+}

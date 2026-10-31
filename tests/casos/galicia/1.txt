@@ -1,0 +1,21 @@
+Identificador de la operación: LRALGWF343
+Datos del pago
+Tipo de transferencia Nro. de Transferencia
+Proveedores 1
+Fecha de envío Monto
+20/10/2026 $ 1.101.585,00
+Concepto Descripción
+Varios -
+Datos del pagador
+CUIT/CUIL Razón Social
+30719016592 VELV SA
+Cuenta a debitar
+CC$ 817421484
+Datos del destinatario
+CUIT/CUIL Razón social
+20174137235 Oscar Enrique Magnanego
+Cuenta en Cuenta de destino
+Mercado Pago 0000003100043103826391
+COMPROBANTE DE LA OPERACIÓN
+1/1 Impreso 20/10/2026 - 16:31
+Office Banking
