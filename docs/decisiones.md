@@ -20,3 +20,8 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 | Galicia, depósito en efectivo (ticket de cajero, imagen) | `nro_operacion` = los 21 dígitos de "Nro Operacion", **sin** el dígito de "Estado" que baja a la línea siguiente. `ordenante` = `"DEPOSITANTE"` (los depósitos no traen ordenante). El titular de la cuenta va como `destinatario`. Sin CBU. |
 | Lemon (imagen) | `nro_operacion` = "ID de la transacción" (no el "COELSA ID"). |
 | Ualá (imagen) | `nro_operacion` = "Id. Op.". |
+
+### Regla general: el ID Coelsa no se usa nunca
+
+- El "ID Coelsa" / "COELSA ID" no se usa como `nro_operacion` en ningún banco ni app.
+- Comprobante tipo "Finalizada" (banco sin identificar): `nro_operacion` = "Nro. de operación".
