@@ -1,0 +1,29 @@
+import { describe, expect, it } from "vitest";
+import { esCvu, validarCbu } from "@/lib/cbu";
+
+/**
+ * CBU SINTÉTICOS: armados a mano aplicando los ponderadores del enunciado para
+ * probar el algoritmo. Falta sumar CBU/CVU reales de comprobantes (pendiente de Alberto).
+ */
+function armar(b1sin: string, b2sin: string): string {
+  const dv = (d: string, p: number[]) => (10 - (p.reduce((a, x, i) => a + x * +d[i], 0) % 10)) % 10;
+  return b1sin + dv(b1sin, [7, 1, 3, 9, 7, 1, 3]) + b2sin + dv(b2sin, [3, 9, 7, 1, 3, 9, 7, 1, 3, 9, 7, 1, 3]);
+}
+
+describe("validarCbu", () => {
+  const ok = armar("0070001", "0000123456789");
+  it("acepta uno válido", () => expect(validarCbu(ok)).toBe(true));
+  it("rechaza dígito verificador roto", () => {
+    const roto = ok.slice(0, 7) + ((+ok[7] + 1) % 10) + ok.slice(8);
+    expect(validarCbu(roto)).toBe(false);
+  });
+  it("rechaza segundo bloque roto", () => {
+    const roto = ok.slice(0, 21) + ((+ok[21] + 1) % 10);
+    expect(validarCbu(roto)).toBe(false);
+  });
+  it("rechaza largo incorrecto", () => expect(validarCbu("123")).toBe(false));
+  it("detecta CVU", () => {
+    expect(esCvu(armar("0000001", "0000123456789"))).toBe(true);
+    expect(esCvu(ok)).toBe(false);
+  });
+});

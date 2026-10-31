@@ -1,0 +1,10 @@
+{
+  "_nota": "Tabla armada desde el listado oficial del BCRA. TODAS las entradas están pendientes de confirmar contra la fuente oficial: no se usan para completar banco_origen/banco_destino hasta que pendiente sea false. Para CVU (empieza con 000) el código es de 8 dígitos (000 + los 5 siguientes); no hay ninguno confirmado todavía.",
+  "entidades": [
+    { "codigo": "007", "tipo": "banco", "nombre": "Banco de Galicia y Buenos Aires", "fuente": "BCRA (sin confirmar)", "pendiente": true },
+    { "codigo": "011", "tipo": "banco", "nombre": "Banco de la Nación Argentina", "fuente": "BCRA (sin confirmar)", "pendiente": true },
+    { "codigo": "014", "tipo": "banco", "nombre": "Banco de la Provincia de Buenos Aires", "fuente": "BCRA (sin confirmar)", "pendiente": true },
+    { "codigo": "072", "tipo": "banco", "nombre": "Banco Santander Argentina", "fuente": "BCRA (sin confirmar)", "pendiente": true },
+    { "codigo": "285", "tipo": "banco", "nombre": "Banco Macro", "fuente": "BCRA (sin confirmar)", "pendiente": true }
+  ]
+}
