@@ -38,3 +38,8 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - Neon guarda `lecturas` (todas) y `no_leidos` (las que no quedan `completo`, con el texto extraído). Sin Blob ni archivos.
 - **No hay ninguna web pública.** El único acceso desde internet es la API (`/api/leer` con clave y `/api/salud`); la raíz da 404 y todo lleva `noindex`. Los casos no leídos se ven y se resuelven desde el panel de Neon con las consultas de `docs/no-leidos.md`.
 - Si no hay `DATABASE_URL` o falla la base, el lector sigue respondiendo y no registra.
+
+## Web de carga (`/cargar`)
+- Página para subir un comprobante y copiar los datos en texto plano. Detrás de usuario `admin` y la clave de `ADMIN_PASSWORD` (Basic Auth, middleware), con `noindex`, sin enlaces desde ningún lado y raíz en 404.
+- Usa `/api/web/leer` (también protegido) y la misma lógica que la API. Registra con app `web`. No guarda el archivo.
+- La URL existe en internet pero está bloqueada con clave. Alternativa más cerrada: protección de despliegues de Vercel (obligaría a las otras apps a mandar un header de bypass).
