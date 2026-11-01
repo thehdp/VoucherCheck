@@ -1,11 +1,11 @@
 "use client";
 import { useRef, useState } from "react";
-import type { Lectura } from "@/lib/tipos";
+import type { LecturaApi } from "@/lib/procesar";
 import { aTextoPlano, montoParaCopiar } from "@/lib/texto-plano";
 import { etiquetaVersion } from "@/lib/version";
 
 export default function Cargador() {
-  const [lectura, setLectura] = useState<Lectura | null>(null);
+  const [lectura, setLectura] = useState<LecturaApi | null>(null);
   const [error, setError] = useState("");
   const [leyendo, setLeyendo] = useState(false);
   const [arrastrando, setArrastrando] = useState(false);
@@ -73,6 +73,7 @@ export default function Cargador() {
         textarea { width: 100%; font-family: ui-monospace, monospace; font-size: .95rem; padding: 10px; border-radius: 10px; }
         .todo { width: 100%; padding: 12px; font-size: 1rem; margin-top: 8px; border-radius: 10px; border: 1px solid #888; background: transparent; color: inherit; cursor: pointer; }
         .error { color: #dc2626; }
+        .repetido { background: #f59e0b; color: #000; padding: 10px 12px; border-radius: 10px; font-weight: 600; }
         @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } .zona { padding: 28px 12px; } }
       `}</style>
       <main className="wrap">
@@ -106,6 +107,12 @@ export default function Cargador() {
         </div>
 
         {error && <p className="error">{error}</p>}
+
+        {lectura?.repetido && (
+          <p className="repetido">
+            ⚠ Este comprobante ya fue leído antes ({lectura.lecturas_previas === 1 ? "1 vez" : `${lectura.lecturas_previas} veces`}). Los datos se muestran igual.
+          </p>
+        )}
 
         {lectura && (
           <>

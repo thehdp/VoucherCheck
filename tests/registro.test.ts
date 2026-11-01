@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import pg from "pg";
 import { asegurarEsquema, MIGRACION, type Ejecutar } from "@/lib/db";
-import { registrarLectura } from "@/lib/registro";
+import { registrarLectura, textoRepetido } from "@/lib/registro";
 import { lecturaVacia, type Lectura } from "@/lib/tipos";
 
 // Prueba contra un Postgres real: TEST_DATABASE_URL=postgres://... npm test
@@ -41,11 +41,16 @@ describe.skipIf(!url)("registro en Postgres (sin duplicados)", () => {
   });
 
   it("el mismo comprobante no se duplica: se pisa y cuenta las veces", async () => {
-    await registrarLectura("tienda", "imagen", lectura(), "texto 1", run);
-    await registrarLectura("web", "imagen", lectura({ hora: "12:45" }), "texto 2", run);
+    const primera = await registrarLectura("tienda", "imagen", lectura(), "texto 1", run);
+    expect(primera).toEqual({ repetido: false, lecturas_previas: 0, primera_lectura: null });
+    const segunda = await registrarLectura("web", "imagen", lectura({ hora: "12:45" }), "texto 2", run);
+    expect(segunda.repetido).toBe(true);
+    expect(segunda.lecturas_previas).toBe(1);
+    expect(segunda.primera_lectura).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    expect((await registrarLectura("web", "imagen", lectura(), "t", run)).lecturas_previas).toBe(2);
     const filas = await run(`SELECT app, veces, hora FROM lecturas WHERE nro_operacion = 'OP-1'`);
     expect(filas).toHaveLength(1);
-    expect(filas[0]).toMatchObject({ app: "tienda", veces: 2, hora: "12:45" }); // conserva la app original, pisa los datos
+    expect(filas[0]).toMatchObject({ app: "tienda", veces: 3, hora: null }); // conserva la app original, pisa los datos
   });
 
   it("distinto monto o fecha = comprobante distinto", async () => {
@@ -71,5 +76,10 @@ describe.skipIf(!url)("registro en Postgres (sin duplicados)", () => {
     await asegurarEsquema(run, true);
     await asegurarEsquema(run, true);
     expect(MIGRACION.length).toBeGreaterThan(0);
+  });
+
+  it("texto del aviso", () => {
+    expect(textoRepetido({ repetido: true, lecturas_previas: 1, primera_lectura: "2026-10-30T22:53:00-03:00" })).toMatch(/ya fue leído antes \(1 vez; primera lectura 30\/10\/2026 22:53\)/);
+    expect(textoRepetido({ repetido: true, lecturas_previas: 3, primera_lectura: null })).toBe("Este comprobante ya fue leído antes (3 veces)");
   });
 });

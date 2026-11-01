@@ -23,7 +23,7 @@ export const mercadopago: Parser = {
       monto: normalizarMonto(texto.match(/^\s*\$\s*([\d.,]+)\s*$/m)?.[1]),
       fecha: normalizarFecha(texto.match(/\d{1,2}\/[a-záéíóú]+\/\d{4}/i)?.[0]),
       hora: normalizarHora(texto.match(/a las\s+(\d{1,2}:\d{2})/i)?.[1]),
-      nro_operacion: limpiarEspacios(texto.match(/operaci[oó]n de Mercado Pago\s*\n\s*(\d{6,})/i)?.[1]),
+      nro_operacion: limpiarEspacios(texto.match(/C[oó]digo de identificaci[oó]n\s*\n\s*([A-Za-z0-9]{10,})/i)?.[1]),
       ordenante: nombreEn(cuentas[0]),
       cuit_ordenante: cuitEn(cuentas[0]),
       cbu_origen: cuentaEn(cuentas[0]),

@@ -3,6 +3,12 @@
 Cada cambio que llega a producción sube la versión (`lib/version.ts`) y suma una entrada acá, arriba de todo.
 Formato del título: `## V<versión> · <AAAA-MM-DD>`.
 
+## V1.4 · 2026-11-01
+- La API avisa cuando un comprobante ya fue leído antes, sin dejar de entregar los datos. La respuesta suma tres campos: `repetido` (true/false), `lecturas_previas` (cuántas veces se leyó antes de esta) y `primera_lectura` (fecha ISO, o `null`), y agrega un texto en `advertencias`: "Este comprobante ya fue leído antes (N veces; primera lectura 30/10/2026 22:53)". El estado no cambia por ser repetido.
+- La web `/cargar` muestra un cartel naranja cuando el comprobante ya se leyó.
+- Mercado Pago: `nro_operacion` ahora es el "Código de identificación" (antes el "N.º de operación"). Confirmado por Alberto.
+- Galicia Office Banking: `nro_operacion` = "Identificador de la operación" (confirmado).
+
 ## V1.3 · 2026-11-01
 - Cierre de mes (`/cierre`, con clave): lista los meses con datos, descarga un Excel del mes (hoja "Lecturas" con todos los campos y hoja "No leídos" con el texto de los pendientes) y permite borrar de la base solo ese mes.
 - Protecciones: el botón de borrar aparece recién después de descargar, hay que escribir BORRAR, y solo se borra lo que entró en el archivo (lo que se cargó después de descargar se conserva). Los no leídos del mes se borran con él.

@@ -8,6 +8,6 @@ const nextConfig = {
   },
 };
 nextConfig.headers = async () => [
-  { source: "/(.*)", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "X-Lector-Version", value: "1.3" }] },
+  { source: "/(.*)", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }, { key: "X-Lector-Version", value: "1.4" }] },
 ];
 export default nextConfig;

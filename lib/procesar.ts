@@ -1,13 +1,16 @@
 import { textoDeImagen } from "@/lib/extraer/ocr";
 import { textoDePdf } from "@/lib/extraer/pdf";
 import { leerTexto } from "@/lib/leer";
-import { registrarLectura } from "@/lib/registro";
+import { registrarLectura, textoRepetido, type InfoRepetido } from "@/lib/registro";
 import type { Lectura } from "@/lib/tipos";
 
 export const MAX_BYTES = 4 * 1024 * 1024;
 
+/** Lectura + aviso de comprobante repetido. Los datos vienen siempre, también cuando ya se había leído. */
+export type LecturaApi = Lectura & InfoRepetido;
+
 export type Resultado =
-  | { ok: true; lectura: Lectura }
+  | { ok: true; lectura: LecturaApi }
   | { ok: false; status: number; error: string; mensaje: string };
 
 function fallo(status: number, error: string, mensaje: string): Resultado {
@@ -31,6 +34,7 @@ export async function procesarArchivo(archivo: unknown, app: string): Promise<Re
   const lectura = leerTexto(texto);
   // Sin datos personales en logs: solo la app y el estado.
   console.log(JSON.stringify({ app, estado: lectura.estado, banco: lectura.banco_emisor }));
-  await registrarLectura(app, esPdf ? "pdf" : "imagen", lectura, texto);
-  return { ok: true, lectura };
+  const info = await registrarLectura(app, esPdf ? "pdf" : "imagen", lectura, texto);
+  const advertencias = info.repetido ? [...lectura.advertencias, textoRepetido(info)] : lectura.advertencias;
+  return { ok: true, lectura: { ...lectura, advertencias, ...info } };
 }

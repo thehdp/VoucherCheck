@@ -63,10 +63,19 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - Al borrar un mes se pierde el control de duplicados contra ese mes: si se vuelve a leer un comprobante viejo, se registra como nuevo.
 - Probado con Postgres real (`TEST_DATABASE_URL`) y con un navegador simulado.
 
+## Aviso de comprobante repetido en la API
+- Si el comprobante ya estaba registrado (mismo banco, nro de operación, monto y fecha), la respuesta trae igual todos los datos y suma: `repetido: true`, `lecturas_previas` (N, sin contar la lectura actual), `primera_lectura` (ISO) y un texto en `advertencias`. Si no es repetido (o la base no está disponible): `repetido: false`, `lecturas_previas: 0`, `primera_lectura: null`.
+- No se informa qué app lo leyó primero. El estado no cambia por ser repetido.
+- Funciona sobre lo que hay en la base: al cerrar un mes se borra, y un comprobante de ese mes se vuelve a ver como nuevo.
+- Sin número de operación no se puede comparar. Alberto: no va a ser un problema porque la imagen va a ser la misma.
+
+## Reglas confirmadas el 2026-11-01
+- **Galicia Office Banking:** `nro_operacion` = "Identificador de la operación".
+- **Mercado Pago:** `nro_operacion` = "Código de identificación" (no el "N.º de operación de Mercado Pago").
+- Los parsers se van corrigiendo a medida que Alberto pasa casos raros (OCR, ICBC en PDF, formatos nuevos). La tabla de bancos se va alimentando con lo que confirme.
+
 ## Pendientes abiertos (cierre de la conversación del 2026-11-01)
 - **Fase 4:** `/docs/conexion.md` y la primera app conectada. Falta que Alberto arme la app (nombre y tecnología).
-- **Galicia Office Banking:** `nro_operacion` = "Identificador de la operación"; el PDF trae también "Nro. de Transferencia". Sin confirmar con Alberto.
-- **Mercado Pago:** `nro_operacion` = "N.º de operación de Mercado Pago" (no el "Código de identificación"). Sin confirmar explícitamente.
 - **OCR:** puede confundir caracteres en fotos (ej. un `%` por un `8`, o `8629` por `86a9`); los errores que cambian el formato se avisan, los que no, no se pueden detectar.
 - **ICBC:** solo probado como imagen; si llega como PDF puede requerir ajuste.
 - **Tabla CBU:** las compañías financieras de 5 dígitos están pendientes; solo hay 4 proveedores de CVU cargados (Mercado Pago, Pago Virtual del Sur, New Finance y Ualá Bank como banco).
