@@ -532,6 +532,13 @@
       "nombre": "NEW FINANCE",
       "fuente": "App bancaria de Alberto: al copiar el CVU 0000290700000000020972 muestra NEW FINANCE",
       "pendiente": false
+    },
+    {
+      "codigo": "453",
+      "tipo": "banco",
+      "nombre": "Naranja X",
+      "fuente": "Confirmado por Alberto (CBU de su cuenta Naranja X empieza con 453)",
+      "pendiente": false
     }
   ]
 }

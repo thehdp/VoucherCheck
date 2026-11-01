@@ -19,6 +19,26 @@ export async function prepararImagen(buffer: Uint8Array): Promise<Buffer> {
     .toBuffer();
 }
 
+interface Simbolo { text: string; bbox: { y0: number; y1: number } }
+interface Palabra { text: string; symbols?: Simbolo[] }
+
+/**
+ * Corrige el "$" chico de los importes grandes que el OCR lee como un dígito ("$ 5.000" → "55.000").
+ * Regla: en una palabra numérica con puntos de miles, si el primer carácter es un dígito claramente más bajo (menos del 75 %)
+ * que la mediana de los demás dígitos, no es un dígito: es el símbolo "$". Devuelve la palabra corregida o null.
+ */
+export function corregirSignoPesos(p: Palabra, palabrasEnLinea = 1): string | null {
+  const simbolos = p.symbols;
+  // Solo importes con puntos de miles ("55.000") que están solos en su línea: así no toca números sueltos de fotos con perspectiva
+  if (palabrasEnLinea !== 1 || !simbolos || simbolos.length < 5 || !/^\d{2,3}(\.\d{3})+$/.test(p.text)) return null;
+  const altos = simbolos.slice(1).filter((x) => /\d/.test(x.text)).map((x) => x.bbox.y1 - x.bbox.y0).sort((a, b) => a - b);
+  if (altos.length < 2) return null;
+  const mediana = altos[Math.floor(altos.length / 2)];
+  const primero = simbolos[0];
+  if (!/\d/.test(primero.text) || primero.bbox.y1 - primero.bbox.y0 >= mediana * 0.75) return null;
+  return "$" + p.text.slice(1);
+}
+
 /** OCR en el servidor con el idioma español incluido en el repo (/ocr), sin descargas externas. */
 export async function textoDeImagen(buffer: Uint8Array): Promise<string> {
   const png = await prepararImagen(buffer);
@@ -28,8 +48,16 @@ export async function textoDeImagen(buffer: Uint8Array): Promise<string> {
     cacheMethod: "none",
   });
   try {
-    const { data } = await worker.recognize(png);
-    return data.text;
+    const { data } = await worker.recognize(png, {}, { blocks: true });
+    let texto = data.text;
+    const lineas = (data.blocks ?? []).flatMap((b) => b.paragraphs.flatMap((pa) => pa.lines));
+    for (const l of lineas) {
+      for (const w of l.words as Palabra[]) {
+        const arreglada = corregirSignoPesos(w, l.words.length);
+        if (arreglada) texto = texto.replace(l.text.trim(), l.text.trim().replace(w.text, arreglada));
+      }
+    }
+    return texto;
   } finally {
     await worker.terminate();
   }

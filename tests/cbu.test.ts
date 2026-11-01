@@ -57,3 +57,10 @@ describe("buscarEntidad (tabla BCRA)", () => {
   });
   it("CVU desconocido → null", () => expect(buscarEntidad("0000999900000000000000")).toBeNull());
 });
+
+describe("Naranja X", () => {
+  it("CBU 453 (confirmado por Alberto)", () => {
+    expect(validarCbu("4530000800069468523182")).toBe(true);
+    expect(buscarEntidad("4530000800069468523182")?.nombre).toBe("Naranja X");
+  });
+});

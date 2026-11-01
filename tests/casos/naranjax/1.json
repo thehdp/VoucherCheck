@@ -1,24 +1,20 @@
 {
   "ok": true,
-  "estado": "no_leido",
+  "estado": "completo",
   "banco_emisor": "Naranja X",
-  "monto": null,
-  "moneda": null,
+  "monto": 5000,
+  "moneda": "ARS",
   "fecha": "2026-10-31",
   "hora": "18:32",
   "nro_operacion": "a46e98d7-4f4e-4f5b-8186-b3a6236a1e32",
   "ordenante": "Alberto Matias Magnanego",
   "cuit_ordenante": "20336199361",
   "cbu_origen": "4530000800069468523182",
-  "banco_origen": null,
+  "banco_origen": "Naranja X",
   "cbu_destino": "0170013840000007741564",
   "banco_destino": "BANCO BBVA ARGENTINA S.A.",
   "alias_destino": null,
   "destinatario": "Castell Oscar Edua",
   "concepto": null,
-  "advertencias": [
-    "Monto no leído: el símbolo $ se confunde con un dígito en el OCR (leyó \"55.000\"). Verificalo en el comprobante",
-    "CBU origen: entidad no encontrada en la tabla",
-    "Faltan campos obligatorios: monto"
-  ]
+  "advertencias": []
 }

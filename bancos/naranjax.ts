@@ -1,5 +1,5 @@
 import type { Parser } from "@/lib/tipos";
-import { cbuDeOcr, limpiarEspacios, limpiarNombre, normalizarCuit, normalizarFecha, normalizarHora } from "@/lib/normalizar";
+import { cbuDeOcr, limpiarEspacios, limpiarNombre, normalizarCuit, normalizarFecha, normalizarHora, normalizarMonto } from "@/lib/normalizar";
 
 /** Quita el texto del ícono que el OCR pega al nombre ("NX Alberto…", "LA Castell…"). */
 function nombreSinIcono(s: string | undefined): string | null {
@@ -10,9 +10,9 @@ function nombreSinIcono(s: string | undefined): string | null {
 /**
  * Naranja X (captura). nro_operacion = "Código de transacción" (el "COELSA ID" no se usa nunca).
  *
- * MONTO: el "$" del importe grande se confunde con un dígito en el OCR ("$ 5.000" salió como
- * "55.000" y con otros preprocesados "$95.000" o "$35.000"). Como no hay forma de saber cuál es el
- * valor real, NO se lee el monto: queda null y se avisa qué leyó el OCR.
+ * MONTO: el importe grande lleva un "$" chico que el OCR confundía con un dígito ("$ 5.000" → "55.000").
+ * lib/extraer/ocr.ts lo corrige por tamaño y deja "$5.000" en el texto. Los centavos salen aparte ("00").
+ * Si el texto no trae el "$" del importe, NO se adivina: monto null y advertencia.
  */
 export const naranjax: Parser = {
   nombre: "Naranja X",
@@ -32,9 +32,15 @@ export const naranjax: Parser = {
     const destino = cuenta(iDestino, iInfo);
     const iCodigo = idx(/^C[oó]digo de transacci[oó]n/i);
 
-    const candidato = lineas.find((l) => /^\$?\s*\d{1,3}(\.\d{3})+$/.test(l));
+    const iEnviaste = idx(/^Enviaste/i);
+    const entero = lineas.find((l) => /^\$\s*\d{1,3}(\.\d{3})*$/.test(l))?.replace(/^\$\s*/, "");
+    const centavos = lineas.slice(Math.max(0, iEnviaste), Math.max(0, iEnviaste) + 5).find((l) => /^\d{2}$/.test(l)) ?? "00";
+    const sospechoso = lineas.find((l) => /^\d{2,3}(\.\d{3})+$/.test(l));
     return {
-      advertencias: [`Monto no leído: el símbolo $ se confunde con un dígito en el OCR${candidato ? ` (leyó "${candidato}")` : ""}. Verificalo en el comprobante`],
+      monto: entero ? normalizarMonto(`${entero},${centavos}`) : null,
+      advertencias: entero
+        ? []
+        : [`Monto no leído: no se encontró el importe con "$"${sospechoso ? ` (el OCR leyó "${sospechoso}", que puede incluir el $ como dígito)` : ""}. Verificalo en el comprobante`],
       fecha: normalizarFecha(texto.match(/\d{1,2}\/[A-Za-z0]{3}\/\d{4}/)?.[0]),
       hora: normalizarHora(texto.match(/\d{4}\s*-\s*(\d{1,2}:\d{2})\s*h/i)?.[1]),
       nro_operacion: iCodigo >= 0 ? limpiarEspacios(lineas[iCodigo + 1]) : null,
