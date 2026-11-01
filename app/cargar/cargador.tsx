@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import type { Lectura } from "@/lib/tipos";
 import { aTextoPlano, montoParaCopiar } from "@/lib/texto-plano";
+import { etiquetaVersion } from "@/lib/version";
 
 export default function Cargador() {
   const [lectura, setLectura] = useState<Lectura | null>(null);
@@ -60,6 +61,7 @@ export default function Cargador() {
         body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
         .wrap { max-width: 640px; margin: 0 auto; padding: 16px; }
         h1 { font-size: 1.4rem; margin: 8px 0 4px; }
+        .ver { font-size: .8rem; font-weight: 400; opacity: .6; white-space: nowrap; }
         .zona { border: 2px dashed #888; border-radius: 14px; padding: 36px 16px; text-align: center; cursor: pointer; margin: 16px 0; }
         .zona.activa { border-color: #2563eb; background: rgba(37,99,235,.1); }
         .zona strong { display: block; font-size: 1.1rem; }
@@ -74,7 +76,7 @@ export default function Cargador() {
         @media (max-width: 420px) { .grid { grid-template-columns: 1fr; } .zona { padding: 28px 12px; } }
       `}</style>
       <main className="wrap">
-        <h1>Leer comprobante</h1>
+        <h1>Leer comprobante <span className="ver">{etiquetaVersion()}</span></h1>
         <p>PDF o imagen (JPG, PNG, WEBP), hasta 4 MB. El archivo no se guarda.</p>
 
         <div

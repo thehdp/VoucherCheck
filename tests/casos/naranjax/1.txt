@@ -1,0 +1,52 @@
+NaranjaX
+Comprobante de transferencia
+
+Enviaste
+
+00
+
+55.000
+
+31/0CT/2026-18:32 h
+
+Cuenta origen
+
+NX Alberto Matias Magnanego
+
+Naranja X
+
+CBU
+
+4530000800069468523182
+
+CUIL
+
+20-33619936-1
+
+Cuenta destino
+
+LA Castell Oscar Edua
+
+A BBVA
+
+CBU
+
+0170013840000007741564
+
+CUIL
+
+20-34647720-3
+
+Información de la operación
+
+COELSA ID
+
+8DOQG619L3IOW7QYVN7JZ5R
+
+Código de transacción
+
+a46e98d7-4f4e-4f5b-8186-b3a6236a1e32
+Naranja Digital Compañía Financiera S.A.U es una entidad financiera
+autorizada por el Banco Central de la República Argentina. Los fondos en
+las cuentas están garantizados conforme las normas aplicables. Términos y
+condiciones en Naranja X.

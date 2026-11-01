@@ -47,7 +47,11 @@ export function normalizarMonto(crudo: string | null | undefined): number | null
 export function normalizarFecha(crudo: string | null | undefined): string | null {
   if (!crudo) return null;
   // "30/octubre/2026" → "30 octubre 2026"
-  const t = crudo.toLowerCase().trim().replace(/(\d)[/-]([a-záéíóú]+)[/-](\d)/, "$1 $2 $3");
+  // "30/octubre/2026" → "30 octubre 2026"; el OCR lee a veces "0CT" por "OCT" (0→o dentro del mes)
+  const t = crudo
+    .toLowerCase()
+    .trim()
+    .replace(/(\d)[/-]([a-záéíóú0]{3,})[/-](\d)/, (_m, a, mes: string, b) => `${a} ${mes.replace(/0/g, "o")} ${b}`);
   let d: number, m: number, a: number;
   let r = t.match(/(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4}|\d{2})\b/);
   if (r) {

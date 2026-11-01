@@ -43,3 +43,10 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - Página para subir un comprobante y copiar los datos en texto plano. Detrás de usuario `admin` y la clave de `ADMIN_PASSWORD` (Basic Auth, middleware), con `noindex`, sin enlaces desde ningún lado y raíz en 404.
 - Usa `/api/web/leer` (también protegido) y la misma lógica que la API. Registra con app `web`. No guarda el archivo.
 - La URL existe en internet pero está bloqueada con clave. Alternativa más cerrada: protección de despliegues de Vercel (obligaría a las otras apps a mandar un header de bypass).
+
+## Versiones
+- El lector tiene versión y fecha (`lib/version.ts`), empezando en **V1.0 · 01/11/2026**. Se ve en `/cargar` (junto al título), en `GET /api/salud` (`version`, `fecha`) y en el header `X-Lector-Version` de las respuestas.
+- Cada cambio que llega a producción: subir `VERSION` y `FECHA_VERSION`, el header en `next.config.mjs` y una entrada nueva arriba en `CHANGELOG.md`. Un test falla si no coinciden.
+
+## Naranja X
+- `nro_operacion` = "Código de transacción". Monto: el OCR confunde el `$` con un dígito ("$ 5.000" → "55.000"), por eso no se lee y queda `no_leido` con advertencia. Se probaron otros preprocesados y el modelo `spa` de mayor calidad (incompatible con el motor del servidor): sin solución confiable por ahora.
