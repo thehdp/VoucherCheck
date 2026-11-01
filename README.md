@@ -2,10 +2,11 @@
 
 Servidor Next.js (Vercel, Node) que lee comprobantes de transferencias argentinas y devuelve JSON. Sin IA en tiempo de ejecución.
 
-- `POST /api/leer` (header `x-api-key`, `multipart/form-data` campo `archivo`)
-- `GET /api/salud`
-- Tests: `npm test` · Variables: ver `.env.example`
+- `POST /api/leer` (header `x-api-key`, `multipart/form-data` campo `archivo`: PDF, JPG, PNG o WEBP, hasta 4 MB)
+- `GET /api/salud` (devuelve la versión)
+- `/cargar` y `/cierre`: web con usuario y clave (`ADMIN_PASSWORD`) para leer un comprobante y para el cierre de mes
+- Tests: `npm test` (con `TEST_DATABASE_URL=postgres://…` corre también las pruebas contra Postgres) · Variables: ver `.env.example`
 
-Solo se guardan datos, nunca archivos (ver `docs/decisiones.md`).
+Versión actual y historial: `CHANGELOG.md`. Decisiones y reglas por banco: `docs/decisiones.md`. Casos no leídos: `docs/no-leidos.md`.
 
-Estado: **Fase 2** (OCR de imágenes con sharp + tesseract.js). Bancos: Supervielle, Galicia (PDF y depósito), Mercado Pago, Ualá, Lemon, New Finance. Pendiente: ICBC.
+Estado: fases 1 a 3 hechas. **Fase 4 pendiente** (`/docs/conexion.md` y la primera app conectada): falta definir la app.
