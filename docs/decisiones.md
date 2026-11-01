@@ -36,5 +36,5 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 
 ## Fase 3 (registro)
 - Neon guarda `lecturas` (todas) y `no_leidos` (las que no quedan `completo`, con el texto extraído). Sin Blob ni archivos.
-- `/no-leidos`: Basic Auth (usuario `admin`, clave en `ADMIN_PASSWORD`). "Marcar como resuelto" borra el texto extraído.
+- **No hay ninguna web pública.** El único acceso desde internet es la API (`/api/leer` con clave y `/api/salud`); la raíz da 404 y todo lleva `noindex`. Los casos no leídos se ven y se resuelven desde el panel de Neon con las consultas de `docs/no-leidos.md`.
 - Si no hay `DATABASE_URL` o falla la base, el lector sigue respondiendo y no registra.

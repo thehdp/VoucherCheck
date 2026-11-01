@@ -7,4 +7,7 @@ const nextConfig = {
     "/api/leer": ["./ocr/**/*", "./node_modules/tesseract.js-core/**/*", "./node_modules/tesseract.js/src/**/*"],
   },
 };
+nextConfig.headers = async () => [
+  { source: "/(.*)", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+];
 export default nextConfig;
