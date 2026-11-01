@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { aTextoPlano } from "@/lib/texto-plano";
+import { aTextoPlano, montoParaCopiar } from "@/lib/texto-plano";
 import { lecturaVacia } from "@/lib/tipos";
 
 describe("aTextoPlano", () => {
@@ -11,5 +11,12 @@ describe("aTextoPlano", () => {
     expect(t).toMatch(/Monto: 1\.500\.000,00 ARS/);
     expect(t).not.toContain("Ordenante");
     expect(t).toContain("⚠ algo raro");
+  });
+
+  it("monto para copiar: sin miles, coma decimal", () => {
+    expect(montoParaCopiar(1500000)).toBe("1500000,00");
+    expect(montoParaCopiar(15000.5)).toBe("15000,50");
+    expect(montoParaCopiar(57121)).toBe("57121,00");
+    expect(montoParaCopiar(null)).toBeNull();
   });
 });

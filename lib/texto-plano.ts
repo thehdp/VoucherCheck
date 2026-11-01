@@ -32,3 +32,8 @@ export function aTextoPlano(r: Lectura): string {
   const avisos = r.advertencias.map((a) => `⚠ ${a}`);
   return [estado, ...lineas, ...(avisos.length ? ["", ...avisos] : [])].join("\n");
 }
+
+/** Monto para pegar en otro sistema: sin símbolos ni puntos de miles, decimales con coma. 1500000 → "1500000,00". */
+export function montoParaCopiar(monto: number | null): string | null {
+  return monto === null ? null : monto.toFixed(2).replace(".", ",");
+}
