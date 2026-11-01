@@ -50,3 +50,8 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 
 ## Naranja X
 - `nro_operacion` = "Código de transacción". Monto: el OCR confunde el `$` con un dígito ("$ 5.000" → "55.000"), por eso no se lee y queda `no_leido` con advertencia. Se probaron otros preprocesados y el modelo `spa` de mayor calidad (incompatible con el motor del servidor): sin solución confiable por ahora.
+
+## Sin duplicados en el registro
+- Un comprobante es "el mismo" si coinciden banco emisor, nro de operación, monto y fecha (los cuatro cargados). Al repetirse se pisa el registro (`INSERT … ON CONFLICT DO UPDATE`), se conserva la `app` y el `creado` de la primera lectura y se suma `veces`.
+- Si no están los cuatro datos no se puede comparar y se guarda cada lectura.
+- El SQL se prueba contra un Postgres real: `TEST_DATABASE_URL=postgres://… npm test` (sin esa variable esas pruebas se saltean).
