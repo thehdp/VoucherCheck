@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-/** La web de carga (/cargar) y su endpoint piden usuario "admin" y la clave de ADMIN_PASSWORD (Basic Auth). */
+/** La web de carga (/cargar), el cierre de mes (/cierre) y sus endpoints piden usuario "admin" y la clave de ADMIN_PASSWORD (Basic Auth). */
 export function middleware(req: NextRequest) {
   const clave = process.env.ADMIN_PASSWORD;
   const auth = req.headers.get("authorization");
@@ -14,4 +14,4 @@ export function middleware(req: NextRequest) {
   });
 }
 
-export const config = { matcher: ["/cargar/:path*", "/api/web/:path*"] };
+export const config = { matcher: ["/cargar/:path*", "/cierre/:path*", "/api/web/:path*"] };

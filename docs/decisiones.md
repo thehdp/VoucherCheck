@@ -55,3 +55,10 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - Un comprobante es "el mismo" si coinciden banco emisor, nro de operación, monto y fecha (los cuatro cargados). Al repetirse se pisa el registro (`INSERT … ON CONFLICT DO UPDATE`), se conserva la `app` y el `creado` de la primera lectura y se suma `veces`.
 - Si no están los cuatro datos no se puede comparar y se guarda cada lectura.
 - El SQL se prueba contra un Postgres real: `TEST_DATABASE_URL=postgres://… npm test` (sin esa variable esas pruebas se saltean).
+
+## Cierre de mes (`/cierre`)
+- **Manual**, no automático: el Excel no se guarda en ningún lado (decisión de no guardar archivos), así que la base nunca se borra sola. Se elige el mes, se descarga el Excel y recién después se habilita borrar (hay que escribir BORRAR).
+- Solo se borra el mes exportado, y solo las lecturas con `id <= maxId` del archivo descargado. Los no leídos se borran en cascada. El mes en curso se puede exportar pero se avisa.
+- Mes = mes de la primera lectura (`creado`), en hora de Buenos Aires.
+- Al borrar un mes se pierde el control de duplicados contra ese mes: si se vuelve a leer un comprobante viejo, se registra como nuevo.
+- Probado con Postgres real (`TEST_DATABASE_URL`) y con un navegador simulado.

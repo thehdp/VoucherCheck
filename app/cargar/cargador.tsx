@@ -123,6 +123,9 @@ export default function Cargador() {
             </button>
           </>
         )}
+        <p style={{ marginTop: 32, opacity: 0.7 }}>
+          <a href="/cierre" style={{ color: "inherit" }}>Cierre de mes (descargar Excel y limpiar la base)</a>
+        </p>
       </main>
     </>
   );
