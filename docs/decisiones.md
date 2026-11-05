@@ -79,7 +79,7 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - El OCR en modo por defecto salteaba el importe ("$ 76.100"); el modo 3 (automático) sí lo lee, pero cambia el orden del texto de las demás imágenes y no se usa como default. Por eso es una segunda pasada solo cuando la primera no sale completa (`lib/procesar.ts`, `elegirMejor` en `lib/leer.ts`).
 
 ## Banco Patagonia
-- Firma por formato (`cuit / cuil / dni`) porque el logo no se lee por OCR. `nro_operacion` = "Nº de transacción" (provisorio; el "Nº de control" tiene formato tipo Coelsa y no se usa: confirmar con Alberto). `ordenante` tal como viene (`APELLIDO, NOMBRE`).
+- Firma por formato (`cuit / cuil / dni`) porque el logo no se lee por OCR. `nro_operacion` = "Nº de transacción" (confirmado por Alberto el 2026-11-05; el "Nº de control" tiene formato tipo Coelsa y no se usa). `ordenante` tal como viene (`APELLIDO, NOMBRE`).
 
 ## Botón "Copiar Monto"
 - Copia solo el número, sin símbolos ni puntos de miles. Si los centavos son cero se copia sin decimales (`33000`); si no, con coma (`15000,50`). Pedido de Alberto el 2026-11-05.

@@ -5,8 +5,8 @@ import { cbuDeOcr, limpiarEspacios, normalizarFecha, normalizarHora, normalizarM
  * Banco Patagonia (comprobante "TRANSFERENCIA").
  * - El logo "BANCOPATAGONIA" es una imagen: el OCR no lo lee. Se reconoce por el formato
  *   ("CUIT / CUIL / DNI:") en /bancos/firmas.json.
- * - nro_operacion = "Nº de transacción". El "Nº de control" (22 caracteres alfanuméricos, formato tipo Coelsa)
- *   NO se usa: pendiente de confirmar con Alberto.
+ * - nro_operacion = "Nº de transacción" (confirmado por Alberto). El "Nº de control" (22 caracteres
+ *   alfanuméricos, formato tipo Coelsa) NO se usa.
  * - "Origen" trae el nombre y la cuenta del banco (CA $ 070-…-000), que no es un CBU: cbu_origen queda null.
  * - Sin CUIT del ordenante: el único CUIT del comprobante es el del destino.
  */

@@ -6,7 +6,7 @@ Formato del título: `## V<versión> · <AAAA-MM-DD>`.
 ## V1.8 · 2026-11-05
 - Banco Patagonia (comprobante "TRANSFERENCIA"): monto, fecha, hora, número de transacción, ordenante ("Origen", como viene impreso: `APELLIDO, NOMBRE`), destinatario, CBU/CVU de destino y concepto. No trae CUIT del ordenante ni CBU de origen (la cuenta `CA $ 070-…` no es un CBU).
 - Como el OCR no lee el logo "BANCOPATAGONIA" (es una imagen), el banco se reconoce por su formato (`CUIT / CUIL / DNI:`); también por el nombre si viniera como texto.
-- `nro_operacion` provisorio = "Nº de transacción"; el "Nº de control" no se usa. Pendiente de confirmar.
+- `nro_operacion` = "Nº de transacción" (confirmado por Alberto); el "Nº de control" no se usa.
 
 ## V1.7 · 2026-11-05
 - Botón "Copiar Monto": si los centavos son cero se copia solo el entero (`33000` en vez de `33000,00`). Con centavos se mantiene la coma (`15000,50`). El texto completo ("Copiar todo") no cambia.
