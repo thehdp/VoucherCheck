@@ -3,8 +3,8 @@ import sharp from "sharp";
 import { createWorker } from "tesseract.js";
 
 /**
- * Prepara la imagen para el OCR: escala de grises, agrandado (mínimo ~2000 px de ancho),
- * normalización de contraste y nitidez. Devuelve un PNG.
+ * Prepara la imagen para el OCR: escala de grises, cambio de tamaño, contraste y nitidez
+ * (con tratamiento aparte para capturas en modo oscuro). Devuelve un PNG.
  */
 export async function prepararImagen(buffer: Uint8Array): Promise<Buffer> {
   const img = sharp(buffer).rotate(); // respeta la orientación EXIF del celular
@@ -13,13 +13,23 @@ export async function prepararImagen(buffer: Uint8Array): Promise<Buffer> {
   // agrandarlas las rompe (el importe grande y los CBU salían mal), así que se llevan a 1200 px.
   // Las chicas se agrandan al doble (mínimo 2000 px) como antes.
   const ancho = width >= 1000 ? 1200 : Math.min(Math.max(width * 2, 2000), 3200);
-  return img
-    .resize({ width: ancho, withoutEnlargement: false })
-    .grayscale()
-    .normalise()
-    .sharpen()
-    .png()
-    .toBuffer();
+  const base = img.clone().resize({ width: ancho, withoutEnlargement: false }).grayscale();
+
+  const fondo = await medianaDeBrillo(buffer);
+  if (fondo < MEDIANA_OSCURA) {
+    // Modo oscuro (ej. Brubank): el texto secundario (fecha, etiquetas) es gris tenue sobre casi negro y el OCR
+    // no lo ve. Se estira el rango tenue (el fondo pasa a negro puro, x4) y se invierte a texto oscuro sobre blanco.
+    return base.linear(4, 16 - 4 * fondo).negate().sharpen().png().toBuffer();
+  }
+  return base.normalise().sharpen().png().toBuffer();
+}
+
+/** Brillo "de fondo" (mediana, 0-255) de la imagen, medido sobre una versión chica. */
+const MEDIANA_OSCURA = 100;
+export async function medianaDeBrillo(buffer: Uint8Array): Promise<number> {
+  const { data } = await sharp(buffer).rotate().resize({ width: 200 }).grayscale().raw().toBuffer({ resolveWithObject: true });
+  const orden = Uint8Array.from(data).sort();
+  return orden[Math.floor(orden.length / 2)];
 }
 
 interface Simbolo { text: string; bbox: { y0: number; y1: number } }

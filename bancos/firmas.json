@@ -1,15 +1,79 @@
 {
   "_nota": "Frases que identifican al banco emisor (se comparan sin tildes y en minúsculas). Se prueban en orden. Solo frases vistas en comprobantes reales: no inventar firmas.",
   "bancos": [
-    { "banco": "supervielle", "frases": ["supervielle\ntransferencia a otra cuenta"] },
-    { "banco": "galicia", "frases": ["office banking", "deposito en efectivo"] },
-    { "banco": "lemon", "frases": ["powered by digifin"] },
-    { "banco": "uala", "frases": ["id. op.", "cbu emisor"] },
-    { "banco": "mercadopago", "frases": ["operacion de mercado pago"] },
-    { "banco": "icbc", "frases": ["nro de movimiento"] },
-    { "banco": "naranjax", "frases": ["naranjax", "naranja x"] },
-    { "banco": "patagonia", "frases": ["cuit / cuil / dni", "bancopatagonia", "banco patagonia"] },
-    { "banco": "personalpay", "frases": ["dinero personal pay", "id bancario"] },
-    { "banco": "newfinance", "frases": ["id coelsa", "1d coelsa"] }
+    {
+      "banco": "supervielle",
+      "frases": [
+        "supervielle\ntransferencia a otra cuenta"
+      ]
+    },
+    {
+      "banco": "galicia",
+      "frases": [
+        "office banking",
+        "deposito en efectivo"
+      ]
+    },
+    {
+      "banco": "lemon",
+      "frases": [
+        "powered by digifin"
+      ]
+    },
+    {
+      "banco": "uala",
+      "frases": [
+        "id. op.",
+        "cbu emisor"
+      ]
+    },
+    {
+      "banco": "mercadopago",
+      "frases": [
+        "operacion de mercado pago"
+      ]
+    },
+    {
+      "banco": "icbc",
+      "frases": [
+        "nro de movimiento"
+      ]
+    },
+    {
+      "banco": "naranjax",
+      "frases": [
+        "naranjax",
+        "naranja x"
+      ]
+    },
+    {
+      "banco": "patagonia",
+      "frases": [
+        "cuit / cuil / dni",
+        "bancopatagonia",
+        "banco patagonia"
+      ]
+    },
+    {
+      "banco": "personalpay",
+      "frases": [
+        "dinero personal pay",
+        "id bancario"
+      ]
+    },
+    {
+      "banco": "newfinance",
+      "frases": [
+        "id coelsa",
+        "1d coelsa"
+      ]
+    },
+    {
+      "banco": "brubank",
+      "frases": [
+        "brubank",
+        "envio de dinero a"
+      ]
+    }
   ]
 }

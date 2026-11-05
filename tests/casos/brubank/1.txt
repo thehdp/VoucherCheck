@@ -1,0 +1,15 @@
+brubank
+Envío de dinero a
+PRESTIGIO PAGOS S.A.
+04 de noviembre de 2026 - 12:35
+S 31.250,00
+() Transferencia enviada
+Destino
+Entidad O vs
+CBU /Cvu 0000046800000159185229
+CUIT / CUIL 30-71628963-6
+Origen
+Titular Ramon Ismael Vera
+CUIT / CUIL 24-35476608-2
+Banco O srubanx
+Origen Caja de ahorro en Pesos

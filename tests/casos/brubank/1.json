@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "estado": "no_leido",
+  "banco_emisor": "Brubank",
+  "monto": 31250,
+  "moneda": "ARS",
+  "fecha": "2026-11-04",
+  "hora": "12:35",
+  "nro_operacion": null,
+  "ordenante": "Ramon Ismael Vera",
+  "cuit_ordenante": "24354766082",
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": "0000046800000159185229",
+  "banco_destino": "Pago Virtual del Sur",
+  "alias_destino": null,
+  "destinatario": "PRESTIGIO PAGOS S.A.",
+  "concepto": null,
+  "advertencias": [
+    "Faltan campos obligatorios: nro_operacion"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "estado": "no_leido",
+  "banco_emisor": "Brubank",
+  "monto": 31250,
+  "moneda": "ARS",
+  "fecha": null,
+  "hora": null,
+  "nro_operacion": null,
+  "ordenante": null,
+  "cuit_ordenante": null,
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": null,
+  "banco_destino": null,
+  "alias_destino": null,
+  "destinatario": null,
+  "concepto": null,
+  "advertencias": [
+    "Faltan campos obligatorios: fecha, nro_operacion"
+  ]
+}

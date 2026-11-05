@@ -78,6 +78,10 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - `nro_operacion` = "N° de operación" (nunca el Coelsa ID / "Id Bancario"). `ordenante` = "Envía". `banco_origen` = "Banco/Billetera de origen" del comprobante ("Personal Pay"). "Entidad no Registrada" como banco destino se ignora y se completa con la tabla CBU.
 - El OCR en modo por defecto salteaba el importe ("$ 76.100"); el modo 3 (automático) sí lo lee, pero cambia el orden del texto de las demás imágenes y no se usa como default. Por eso es una segunda pasada solo cuando la primera no sale completa (`lib/procesar.ts`, `elegirMejor` en `lib/leer.ts`).
 
+## Brubank
+- Captura en modo oscuro. `ordenante` = "Titular" (con su CUIT). El "$" se lee como "S". La captura no trae número de operación: sale `no_leido` hasta que Alberto defina de dónde sacarlo (ver si la app muestra más abajo un ID o comprobante).
+- **Modo oscuro en el OCR:** si la mediana de brillo es < 100 se aplica `linear(4, 16 - 4·fondo)` + `negate`. El texto secundario es gris tenue (brillo ~87 sobre un fondo de ~26) y sin ese estiramiento no se lee. Verificado que ninguna imagen clara llega a ese umbral.
+
 ## Galicia: los 3 formatos
 1. PDF Office Banking "Datos del pago": `nro_operacion` = "Identificador de la operación".
 2. Ticket de cajero "Depósito en efectivo": `nro_operacion` = 21 dígitos sin el de "Estado"; ordenante `DEPOSITO`.

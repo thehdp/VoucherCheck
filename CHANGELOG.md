@@ -3,6 +3,12 @@
 Cada cambio que llega a producción sube la versión (`lib/version.ts`) y suma una entrada acá, arriba de todo.
 Formato del título: `## V<versión> · <AAAA-MM-DD>`.
 
+## V1.10 · 2026-11-05
+- Brubank (captura en modo oscuro): monto, fecha, hora, destinatario, CBU/CVU de destino, y titular con su CUIT como ordenante.
+- La captura de Brubank **no trae número de operación**, así que sale `no_leido` hasta que se defina de dónde sacarlo.
+- OCR: modo oscuro. Si la imagen tiene el fondo oscuro (mediana de brillo < 100 de 255) se estira el rango tenue y se invierte antes de leerla. Sin eso el OCR salteaba la fecha y las etiquetas (gris tenue sobre casi negro). Verificado con las 14 imágenes anteriores: ninguna es "oscura" (la más cercana tiene mediana 169) y todas dan igual que antes.
+- Brubank se reconoce por su nombre y por "Envío de dinero a"; su firma va al final de la lista para no pisar a otros bancos.
+
 ## V1.9 · 2026-11-05
 - Galicia Office Banking, tercer formato: "Detalle de movimiento" (débito de una transferencia a proveedores, en captura). Lee monto, fecha, destinatario y concepto, con `nro_operacion` = "Número de comprobante".
 - Ese formato no trae ordenante, hora ni CBU: quedan vacíos. El CUIT del destino y la abreviatura del banco (ej. "PVS") no tienen campo propio y no se guardan.
