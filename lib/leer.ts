@@ -51,3 +51,14 @@ export function leerTexto(texto: string): Lectura {
   }
   return out;
 }
+
+/** Qué tan completa quedó una lectura: campos obligatorios cargados (peso 100) menos advertencias. */
+export function puntaje(l: Lectura): number {
+  const cargados = CAMPOS_OBLIGATORIOS.filter((c) => l[c] !== null).length;
+  return cargados * 100 - l.advertencias.length;
+}
+
+/** Entre dos lecturas del mismo comprobante se queda con la más completa; si empatan, con la primera. */
+export function elegirMejor<T extends { lectura: Lectura }>(primera: T, segunda: T): T {
+  return puntaje(segunda.lectura) > puntaje(primera.lectura) ? segunda : primera;
+}

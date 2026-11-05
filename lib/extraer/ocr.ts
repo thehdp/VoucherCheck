@@ -40,7 +40,7 @@ export function corregirSignoPesos(p: Palabra, palabrasEnLinea = 1): string | nu
 }
 
 /** OCR en el servidor con el idioma español incluido en el repo (/ocr), sin descargas externas. */
-export async function textoDeImagen(buffer: Uint8Array): Promise<string> {
+export async function textoDeImagen(buffer: Uint8Array, opciones: { segmentacionAutomatica?: boolean } = {}): Promise<string> {
   const png = await prepararImagen(buffer);
   const worker = await createWorker("spa", 1, {
     langPath: path.join(process.cwd(), "ocr"),
@@ -48,6 +48,9 @@ export async function textoDeImagen(buffer: Uint8Array): Promise<string> {
     cacheMethod: "none",
   });
   try {
+    // Modo 3 = el motor detecta solo los bloques. Es la segunda pasada: a veces recupera textos grandes
+    // (ej. el importe) que el modo por defecto saltea, pero cambia el orden del texto, así que no es el default.
+    if (opciones.segmentacionAutomatica) await worker.setParameters({ tessedit_pageseg_mode: "3" as never });
     const { data } = await worker.recognize(png, {}, { blocks: true });
     let texto = data.text;
     const lineas = (data.blocks ?? []).flatMap((b) => b.paragraphs.flatMap((pa) => pa.lines));

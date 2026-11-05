@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "estado": "completo",
+  "banco_emisor": "Personal Pay",
+  "monto": 76100,
+  "moneda": "ARS",
+  "fecha": "2026-10-27",
+  "hora": "07:49",
+  "nro_operacion": "3286385498",
+  "ordenante": "JORGE JACINTO CAMPOS",
+  "cuit_ordenante": "20459552872",
+  "cbu_origen": null,
+  "banco_origen": "Personal Pay",
+  "cbu_destino": "0000046800000159185229",
+  "banco_destino": "Pago Virtual del Sur",
+  "alias_destino": null,
+  "destinatario": "Prestigio Pagos S.A.",
+  "concepto": null,
+  "advertencias": []
+}

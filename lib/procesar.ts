@@ -1,6 +1,6 @@
 import { textoDeImagen } from "@/lib/extraer/ocr";
 import { textoDePdf } from "@/lib/extraer/pdf";
-import { leerTexto } from "@/lib/leer";
+import { elegirMejor, leerTexto } from "@/lib/leer";
 import { registrarLectura, textoRepetido, type InfoRepetido } from "@/lib/registro";
 import type { Lectura } from "@/lib/tipos";
 
@@ -30,8 +30,14 @@ export async function procesarArchivo(archivo: unknown, app: string): Promise<Re
     (buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 && buf[8] === 0x57); // WEBP
   if (!esPdf && !esImagen) return fallo(415, "formato_no_soportado", "Solo se leen PDF, JPG, PNG o WEBP");
 
-  const texto = esPdf ? await textoDePdf(buf) : await textoDeImagen(buf);
-  const lectura = leerTexto(texto);
+  const texto1 = esPdf ? await textoDePdf(buf) : await textoDeImagen(buf);
+  let elegida = { texto: texto1, lectura: leerTexto(texto1) };
+  if (esImagen && elegida.lectura.estado !== "completo") {
+    // Segunda pasada de OCR solo cuando la primera no salió completa: así no se toca lo que ya anda
+    const texto2 = await textoDeImagen(buf, { segmentacionAutomatica: true });
+    elegida = elegirMejor(elegida, { texto: texto2, lectura: leerTexto(texto2) });
+  }
+  const { texto, lectura } = elegida;
   // Sin datos personales en logs: solo la app y el estado.
   console.log(JSON.stringify({ app, estado: lectura.estado, banco: lectura.banco_emisor }));
   const info = await registrarLectura(app, esPdf ? "pdf" : "imagen", lectura, texto);

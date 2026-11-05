@@ -2,7 +2,7 @@
  * Versión del lector. Se actualiza en cada cambio que llega a producción,
  * junto con una entrada nueva ARRIBA en CHANGELOG.md (un test lo verifica).
  */
-export const VERSION = "1.4";
+export const VERSION = "1.5";
 export const FECHA_VERSION = "2026-11-01"; // AAAA-MM-DD
 
 export function fechaVersionAr(): string {

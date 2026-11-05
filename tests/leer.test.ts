@@ -20,3 +20,24 @@ describe("validarClave", () => {
     expect(validarClave("abc123", undefined)).toBeNull();
   });
 });
+
+import { elegirMejor, puntaje } from "@/lib/leer";
+import { lecturaVacia } from "@/lib/tipos";
+
+describe("segunda pasada de OCR: elegirMejor", () => {
+  const completa = { ...lecturaVacia(), banco_emisor: "X", monto: 1, fecha: "2026-01-01", nro_operacion: "1" };
+  const sinMonto = { ...completa, monto: null };
+  it("puntúa por campos obligatorios", () => expect(puntaje(completa)).toBeGreaterThan(puntaje(sinMonto)));
+  it("se queda con la que tiene más campos", () => {
+    expect(elegirMejor({ lectura: sinMonto, id: 1 }, { lectura: completa, id: 2 }).id).toBe(2);
+  });
+  it("si empatan, se queda con la primera", () => {
+    expect(elegirMejor({ lectura: completa, id: 1 }, { lectura: { ...completa }, id: 2 }).id).toBe(1);
+  });
+  it("no cambia a una peor", () => {
+    expect(elegirMejor({ lectura: completa, id: 1 }, { lectura: sinMonto, id: 2 }).id).toBe(1);
+  });
+  it("a igual cantidad de campos, prefiere la de menos advertencias", () => {
+    expect(elegirMejor({ lectura: { ...completa, advertencias: ["a", "b"] }, id: 1 }, { lectura: completa, id: 2 }).id).toBe(2);
+  });
+});

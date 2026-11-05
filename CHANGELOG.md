@@ -3,6 +3,10 @@
 Cada cambio que llega a producción sube la versión (`lib/version.ts`) y suma una entrada acá, arriba de todo.
 Formato del título: `## V<versión> · <AAAA-MM-DD>`.
 
+## V1.5 · 2026-11-05
+- Personal Pay (captura de la app): ordenante ("Envía") con su CUIT, banco de origen tal como lo dice el comprobante, destinatario y CBU/CVU de destino. `nro_operacion` = "N° de operación" (el "Coelsa ID" / "Id Bancario" no se usa). No trae CBU de origen. El banco destino sale de la tabla CBU (el comprobante dice "Entidad no Registrada").
+- OCR: segunda pasada automática. Si una imagen no sale `completo`, se vuelve a leer con otro modo de segmentación y se queda con el resultado más completo. Resuelve casos donde el OCR salteaba el importe grande (Personal Pay). Las imágenes que ya salían bien no se tocan (se verificó con las 9 anteriores). Las que no salen completas tardan más (hasta ~12 s).
+
 ## V1.4 · 2026-11-01
 - La API avisa cuando un comprobante ya fue leído antes, sin dejar de entregar los datos. La respuesta suma tres campos: `repetido` (true/false), `lecturas_previas` (cuántas veces se leyó antes de esta) y `primera_lectura` (fecha ISO, o `null`), y agrega un texto en `advertencias`: "Este comprobante ya fue leído antes (N veces; primera lectura 30/10/2026 22:53)". El estado no cambia por ser repetido.
 - La web `/cargar` muestra un cartel naranja cuando el comprobante ya se leyó.

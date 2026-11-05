@@ -74,6 +74,10 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - **Mercado Pago:** `nro_operacion` = "Código de identificación" (no el "N.º de operación de Mercado Pago").
 - Los parsers se van corrigiendo a medida que Alberto pasa casos raros (OCR, ICBC en PDF, formatos nuevos). La tabla de bancos se va alimentando con lo que confirme.
 
+## Personal Pay
+- `nro_operacion` = "N° de operación" (nunca el Coelsa ID / "Id Bancario"). `ordenante` = "Envía". `banco_origen` = "Banco/Billetera de origen" del comprobante ("Personal Pay"). "Entidad no Registrada" como banco destino se ignora y se completa con la tabla CBU.
+- El OCR en modo por defecto salteaba el importe ("$ 76.100"); el modo 3 (automático) sí lo lee, pero cambia el orden del texto de las demás imágenes y no se usa como default. Por eso es una segunda pasada solo cuando la primera no sale completa (`lib/procesar.ts`, `elegirMejor` en `lib/leer.ts`).
+
 ## Pendientes abiertos (cierre de la conversación del 2026-11-01)
 - **Fase 4:** `/docs/conexion.md` y la primera app conectada. Falta que Alberto arme la app (nombre y tecnología).
 - **OCR:** puede confundir caracteres en fotos (ej. un `%` por un `8`, o `8629` por `86a9`); los errores que cambian el formato se avisan, los que no, no se pueden detectar.
