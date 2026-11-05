@@ -3,6 +3,9 @@
 Cada cambio que llega a producción sube la versión (`lib/version.ts`) y suma una entrada acá, arriba de todo.
 Formato del título: `## V<versión> · <AAAA-MM-DD>`.
 
+## V1.7 · 2026-11-05
+- Botón "Copiar Monto": si los centavos son cero se copia solo el entero (`33000` en vez de `33000,00`). Con centavos se mantiene la coma (`15000,50`). El texto completo ("Copiar todo") no cambia.
+
 ## V1.6 · 2026-11-05
 - OCR: las capturas anchas (≥ 1000 px) ya no se agrandan: se llevan a 1200 px. Agrandarlas rompía la lectura del importe grande y de los CBU. Mejoró Personal Pay, el "Finalizada" (New Finance, ahora lee bien el número de operación) y el Ualá nuevo.
 - Un número de operación con formato inesperado ahora deja la lectura en `parcial` con advertencia ("posible error de OCR") en Ualá, Lemon y Naranja X (deben ser UUID) y New Finance (32 caracteres hexadecimales). Antes salían `completo` con un número basura.

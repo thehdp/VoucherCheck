@@ -33,7 +33,12 @@ export function aTextoPlano(r: Lectura): string {
   return [estado, ...lineas, ...(avisos.length ? ["", ...avisos] : [])].join("\n");
 }
 
-/** Monto para pegar en otro sistema: sin símbolos ni puntos de miles, decimales con coma. 1500000 → "1500000,00". */
+/**
+ * Monto para pegar en otro sistema: sin símbolos ni puntos de miles. Si los centavos son cero se copia
+ * solo el entero (33000); si hay centavos, con coma decimal (15000,50).
+ */
 export function montoParaCopiar(monto: number | null): string | null {
-  return monto === null ? null : monto.toFixed(2).replace(".", ",");
+  if (monto === null) return null;
+  const [entero, centavos] = monto.toFixed(2).split(".");
+  return centavos === "00" ? entero : `${entero},${centavos}`;
 }

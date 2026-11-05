@@ -78,6 +78,9 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - `nro_operacion` = "N° de operación" (nunca el Coelsa ID / "Id Bancario"). `ordenante` = "Envía". `banco_origen` = "Banco/Billetera de origen" del comprobante ("Personal Pay"). "Entidad no Registrada" como banco destino se ignora y se completa con la tabla CBU.
 - El OCR en modo por defecto salteaba el importe ("$ 76.100"); el modo 3 (automático) sí lo lee, pero cambia el orden del texto de las demás imágenes y no se usa como default. Por eso es una segunda pasada solo cuando la primera no sale completa (`lib/procesar.ts`, `elegirMejor` en `lib/leer.ts`).
 
+## Botón "Copiar Monto"
+- Copia solo el número, sin símbolos ni puntos de miles. Si los centavos son cero se copia sin decimales (`33000`); si no, con coma (`15000,50`). Pedido de Alberto el 2026-11-05.
+
 ## Lecciones del OCR (V1.6)
 - **Escala:** Tesseract lee mejor texto de ~25-40 px de alto. Agrandar una captura que ya es ancha (≥ 1000 px) la rompe; se lleva a 1200 px. Las imágenes chicas se agrandan al doble (mínimo 2000 px).
 - **Nunca `completo` con datos dudosos:** si un campo con formato fijo (UUID, hexadecimal, CBU) no cumple el formato, se avisa y el estado queda `parcial`. No se corrige a ciegas.

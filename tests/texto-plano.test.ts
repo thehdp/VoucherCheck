@@ -13,10 +13,12 @@ describe("aTextoPlano", () => {
     expect(t).toContain("⚠ algo raro");
   });
 
-  it("monto para copiar: sin miles, coma decimal", () => {
-    expect(montoParaCopiar(1500000)).toBe("1500000,00");
+  it("monto para copiar: sin miles, sin ,00 y con coma si hay centavos", () => {
+    expect(montoParaCopiar(1500000)).toBe("1500000");
+    expect(montoParaCopiar(33000)).toBe("33000");
     expect(montoParaCopiar(15000.5)).toBe("15000,50");
-    expect(montoParaCopiar(57121)).toBe("57121,00");
+    expect(montoParaCopiar(15000.05)).toBe("15000,05");
+    expect(montoParaCopiar(0.5)).toBe("0,50");
     expect(montoParaCopiar(null)).toBeNull();
   });
 });
