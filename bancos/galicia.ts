@@ -10,6 +10,7 @@ export const galicia: Parser = {
   nombre: "Banco Galicia",
   parsear(texto) {
     if (/dep[oó]sito en efectivo/i.test(texto)) return parsearDeposito(texto);
+    if (/detalle de movimiento/i.test(texto)) return parsearMovimiento(texto);
     const pagador = texto.match(/Datos del pagador[\s\S]*?\n(\d{11})\s+([^\n]+)/);
     const dest = texto.match(/Datos del destinatario[\s\S]*?\n(\d{11})\s+([^\n]+)/);
     const concepto = texto.match(/Concepto Descripci[oó]n\s*\n\s*(\S[^\n]*?)\s+-?\s*\n/)?.[1];
@@ -55,5 +56,29 @@ function parsearDeposito(texto: string) {
     nro_operacion: nro,
     ordenante: "DEPOSITO",
     destinatario: limpiarEspacios(titular),
+  };
+}
+
+/**
+ * Office Banking, "Detalle de movimiento" (débito de una transferencia a proveedores, captura).
+ * - nro_operacion = "Número de comprobante".
+ * - Los datos del destino vienen en "Leyendas adicionales", en orden: nombre, CUIT, concepto, banco abreviado (ej. PVS).
+ *   El CUIT y la abreviatura no tienen campo propio: no se guardan. Sin CBU.
+ * - No trae ordenante (la "Cuenta débito" es la propia, sin nombre), ni hora, ni CBU: quedan null.
+ */
+function parsearMovimiento(texto: string) {
+  const lineas = texto.split("\n").map((l) => l.trim()).filter(Boolean);
+  const iFila = lineas.findIndex((l) => /^Fecha de preparaci[oó]n/i.test(l));
+  const fila = iFila >= 0 ? lineas[iFila + 1] ?? "" : ""; // "03/11/2026 Débito $ 97.600,00"
+  const iLey = lineas.findIndex((l) => /^Leyendas adicionales/i.test(l));
+  const iNro = lineas.findIndex((l) => /^N[uú]mero de comprobante/i.test(l));
+  const leyendas = iLey >= 0 ? lineas.slice(iLey + 1, iNro > iLey ? iNro : undefined) : [];
+  const iCuit = leyendas.findIndex((l) => /^\d{11}$/.test(l));
+  return {
+    monto: normalizarMonto(fila.match(/\$\s*([\d.,]+)\s*$/)?.[1]),
+    fecha: normalizarFecha(fila.match(/\d{1,2}\/\d{1,2}\/\d{4}/)?.[0]),
+    nro_operacion: limpiarEspacios(iNro >= 0 ? lineas[iNro + 1]?.match(/^\d{4,}$/)?.[0] : undefined),
+    destinatario: limpiarEspacios(leyendas[0]),
+    concepto: iCuit >= 0 ? limpiarEspacios(leyendas[iCuit + 1]) : null,
   };
 }

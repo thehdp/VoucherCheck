@@ -3,6 +3,11 @@
 Cada cambio que llega a producción sube la versión (`lib/version.ts`) y suma una entrada acá, arriba de todo.
 Formato del título: `## V<versión> · <AAAA-MM-DD>`.
 
+## V1.9 · 2026-11-05
+- Galicia Office Banking, tercer formato: "Detalle de movimiento" (débito de una transferencia a proveedores, en captura). Lee monto, fecha, destinatario y concepto, con `nro_operacion` = "Número de comprobante".
+- Ese formato no trae ordenante, hora ni CBU: quedan vacíos. El CUIT del destino y la abreviatura del banco (ej. "PVS") no tienen campo propio y no se guardan.
+- Galicia ya tiene 3 formatos: PDF "Datos del pago", ticket de cajero "Depósito en efectivo" y "Detalle de movimiento".
+
 ## V1.8 · 2026-11-05
 - Banco Patagonia (comprobante "TRANSFERENCIA"): monto, fecha, hora, número de transacción, ordenante ("Origen", como viene impreso: `APELLIDO, NOMBRE`), destinatario, CBU/CVU de destino y concepto. No trae CUIT del ordenante ni CBU de origen (la cuenta `CA $ 070-…` no es un CBU).
 - Como el OCR no lee el logo "BANCOPATAGONIA" (es una imagen), el banco se reconoce por su formato (`CUIT / CUIL / DNI:`); también por el nombre si viniera como texto.

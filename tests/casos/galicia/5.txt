@@ -1,0 +1,17 @@
+0)
+1de 1
+Office Banking
+Detalle de movimiento
+Trf Inmed Proveed
+Fecha de preparación Tipo de movimiento Importe
+03/11/2026 Débito $ 97.600,00
+Cuenta débito
+Cuenta Corriente $ N* 0005617-1 121-8
+Leyendas adicionales
+Prestigio Pagos S.A.
+30716289636
+VARIOS
+PVS
+Número de comprobante
+63899162
+Salvo error u omisión (S.E.U.O.)
