@@ -78,6 +78,13 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - `nro_operacion` = "N° de operación" (nunca el Coelsa ID / "Id Bancario"). `ordenante` = "Envía". `banco_origen` = "Banco/Billetera de origen" del comprobante ("Personal Pay"). "Entidad no Registrada" como banco destino se ignora y se completa con la tabla CBU.
 - El OCR en modo por defecto salteaba el importe ("$ 76.100"); el modo 3 (automático) sí lo lee, pero cambia el orden del texto de las demás imágenes y no se usa como default. Por eso es una segunda pasada solo cuando la primera no sale completa (`lib/procesar.ts`, `elegirMejor` en `lib/leer.ts`).
 
+## Lecciones del OCR (V1.6)
+- **Escala:** Tesseract lee mejor texto de ~25-40 px de alto. Agrandar una captura que ya es ancha (≥ 1000 px) la rompe; se lleva a 1200 px. Las imágenes chicas se agrandan al doble (mínimo 2000 px).
+- **Nunca `completo` con datos dudosos:** si un campo con formato fijo (UUID, hexadecimal, CBU) no cumple el formato, se avisa y el estado queda `parcial`. No se corrige a ciegas.
+- **Segunda pasada** (modo de segmentación automático): solo cuando faltan campos obligatorios. Cambia el orden del texto, así que si la primera pasada tiene todo lo obligatorio se respeta, para no perder los nombres.
+- Se probó releer solo la palabra del Id. Op. con un alfabeto restringido (0-9, a-f, guion): pierde caracteres y en otros comprobantes empeora. Descartado.
+- Caso de regresión guardado: `tests/casos/uala/3` es la lectura mala original (monto `$4`, CVU de 23 caracteres, Id. Op. basura): debe salir `parcial` con advertencias, nunca `completo` limpio.
+
 ## Pendientes abiertos (cierre de la conversación del 2026-11-01)
 - **Fase 4:** `/docs/conexion.md` y la primera app conectada. Falta que Alberto arme la app (nombre y tecnología).
 - **OCR:** puede confundir caracteres en fotos (ej. un `%` por un `8`, o `8629` por `86a9`); los errores que cambian el formato se avisan, los que no, no se pueden detectar.

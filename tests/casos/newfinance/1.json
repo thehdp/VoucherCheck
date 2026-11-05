@@ -17,6 +17,6 @@
   "destinatario": "PRESTIGIO PAGOS S.A.",
   "concepto": "Varios",
   "advertencias": [
-    "nro_operacion con largo inesperado (posible error de OCR)"
+    "nro_operacion con formato inesperado (posible error de OCR)"
   ]
 }

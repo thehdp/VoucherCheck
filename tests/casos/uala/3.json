@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "estado": "parcial",
+  "banco_emisor": "Ualá",
+  "monto": 4,
+  "moneda": "ARS",
+  "fecha": "2026-11-03",
+  "hora": "09:10",
+  "nro_operacion": "7/lbó6daad-7732-4ff3-992e-0043ab3731f3",
+  "ordenante": "Marcos Agustin Miranda",
+  "cuit_ordenante": "20407537794",
+  "cbu_origen": "3840200500000019318611",
+  "banco_origen": "UALA BANK S.A.U.",
+  "cbu_destino": null,
+  "banco_destino": null,
+  "alias_destino": null,
+  "destinatario": "Prestigio Pagos S.a.",
+  "concepto": "Varios",
+  "advertencias": [
+    "CBU/CVU destino ilegible (posible error de OCR)",
+    "nro_operacion con formato inesperado (posible error de OCR)"
+  ]
+}

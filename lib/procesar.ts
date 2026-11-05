@@ -32,8 +32,10 @@ export async function procesarArchivo(archivo: unknown, app: string): Promise<Re
 
   const texto1 = esPdf ? await textoDePdf(buf) : await textoDeImagen(buf);
   let elegida = { texto: texto1, lectura: leerTexto(texto1) };
-  if (esImagen && elegida.lectura.estado !== "completo") {
-    // Segunda pasada de OCR solo cuando la primera no salió completa: así no se toca lo que ya anda
+  if (esImagen && elegida.lectura.estado === "no_leido") {
+    // Segunda pasada de OCR solo cuando la primera NO logró los campos obligatorios (ej. no leyó el importe).
+    // Si la primera tiene todo pero con dudas ("parcial") se respeta: la segunda cambia el orden del texto
+    // y puede tomar mal los nombres, que no son campos obligatorios y no se notarían.
     const texto2 = await textoDeImagen(buf, { segmentacionAutomatica: true });
     elegida = elegirMejor(elegida, { texto: texto2, lectura: leerTexto(texto2) });
   }

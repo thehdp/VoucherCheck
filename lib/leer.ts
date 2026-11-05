@@ -32,9 +32,11 @@ export function leerTexto(texto: string): Lectura {
     else out[`banco_${lado}`] = e.nombre;
   }
 
-  // Un número de operación con largo raro casi seguro es un error de OCR: se avisa, no se corrige.
-  if (out.banco_emisor === "New Finance" && out.nro_operacion && !/^[0-9a-f]{32}$/.test(out.nro_operacion)) {
-    out.advertencias.push("nro_operacion con largo inesperado (posible error de OCR)");
+  // Si el número de operación no tiene el formato que usa ese banco, casi seguro es un error de OCR:
+  // se avisa (el estado pasa a "parcial") pero no se corrige a ciegas.
+  const formato = out.banco_emisor ? FORMATO_NRO_OPERACION[out.banco_emisor] : undefined;
+  if (formato && out.nro_operacion && !formato.test(out.nro_operacion)) {
+    out.advertencias.push("nro_operacion con formato inesperado (posible error de OCR)");
   }
   if (out.banco_emisor === "Banco Galicia" && out.ordenante === "DEPOSITO" && out.nro_operacion === null) {
     out.advertencias.push("nro_operacion del depósito ilegible (posible error de OCR)");
@@ -52,10 +54,20 @@ export function leerTexto(texto: string): Lectura {
   return out;
 }
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+/** Formato del número de operación por banco (solo los que tienen uno fijo). */
+export const FORMATO_NRO_OPERACION: Record<string, RegExp> = {
+  "Ualá": UUID,
+  Lemon: UUID,
+  "Naranja X": UUID,
+  "New Finance": /^[0-9a-f]{32}$/,
+};
+
 /** Qué tan completa quedó una lectura: campos obligatorios cargados (peso 100) menos advertencias. */
 export function puntaje(l: Lectura): number {
   const cargados = CAMPOS_OBLIGATORIOS.filter((c) => l[c] !== null).length;
-  return cargados * 100 - l.advertencias.length;
+  // Cada advertencia resta: una lectura con dudas pierde contra una limpia aunque tenga los mismos campos
+  return cargados * 100 - l.advertencias.length * 30;
 }
 
 /** Entre dos lecturas del mismo comprobante se queda con la más completa; si empatan, con la primera. */

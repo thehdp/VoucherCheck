@@ -1,0 +1,40 @@
+Destinatario
+
+Cuenta destino
+
+CVU destino
+
+CUIT/CUIL destino
+
+Emisor
+
+CBU emisor
+
+CUIT/CUIL emisor
+
+Motivo
+
+Id. Op.
+
+uN ualá
+
+Comprobante de transferencia
+
+$33.000
+
+03/11/2026 - 09:10 hs
+
+Prestigio Pagos S.a.
+
+PAGO VIRTUAL DEL SUR SA
+0000046800000159185229
+30-71628963-6
+
+Marcos Agustin Miranda
+3840200500000019318611
+20-40753779-4
+
+Varios
+
+Mbódaad-7732-4ff3-992e-0043ab3731f3
+

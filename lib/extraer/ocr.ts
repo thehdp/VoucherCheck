@@ -9,7 +9,10 @@ import { createWorker } from "tesseract.js";
 export async function prepararImagen(buffer: Uint8Array): Promise<Buffer> {
   const img = sharp(buffer).rotate(); // respeta la orientación EXIF del celular
   const { width = 0 } = await img.metadata();
-  const ancho = Math.min(Math.max(width * 2, 2000), 3200);
+  // Tesseract lee mejor el texto de ~25-40 px de alto. Las capturas anchas (≥ 1000 px) ya tienen ese tamaño:
+  // agrandarlas las rompe (el importe grande y los CBU salían mal), así que se llevan a 1200 px.
+  // Las chicas se agrandan al doble (mínimo 2000 px) como antes.
+  const ancho = width >= 1000 ? 1200 : Math.min(Math.max(width * 2, 2000), 3200);
   return img
     .resize({ width: ancho, withoutEnlargement: false })
     .grayscale()

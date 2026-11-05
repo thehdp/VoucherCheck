@@ -1,0 +1,13 @@
+[AAA
+(Finalizada)
+- 967.200,00 ars
+20 de octubre de 2026, 04:55 p. m.
+Origen
+Titular Curr /cuIL Cuenta
+TIMECLOCK S.A 30719042852 0000290700000000020972
+Destino
+Titular CUIT / CUIL Cuenta Banco
+PRESTIGIO PAGOS S.A. 30716289636 0000046800000159185229 -
+Referencias
+Nro. de operación 1D Coelsa Motivo
+bfIO5f6c0eee4fd7a90635a3be4ad87c LI8MKX9RPMJODYOK206WYV Varios

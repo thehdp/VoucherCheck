@@ -1,0 +1,13 @@
+O
+$4
+Comprobante de transferencia
+03/11/2026 - 09:10 hs
+Destinatario Prestigio Pagos S.a.
+Cuenta destino PAGO VIRTUAL DEL SUR SA
+CVU destino 00000465800000159185229
+CUIT/CUIL destino 30-71628963-6
+Emisor Marcos Agustin Miranda
+CBU emisor 3840200500000019318611
+CUIT/CUIL emisor 20-40753779-4
+Motivo Varios
+Id. Op. 7/lbó6daad-7732-4ff3-992e-0043ab3731f3

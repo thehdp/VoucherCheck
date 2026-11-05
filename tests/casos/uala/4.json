@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "estado": "parcial",
+  "banco_emisor": "Ualá",
+  "monto": 33000,
+  "moneda": "ARS",
+  "fecha": "2026-11-03",
+  "hora": "09:10",
+  "nro_operacion": "uN ualá",
+  "ordenante": null,
+  "cuit_ordenante": null,
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": null,
+  "banco_destino": null,
+  "alias_destino": null,
+  "destinatario": null,
+  "concepto": null,
+  "advertencias": [
+    "nro_operacion con formato inesperado (posible error de OCR)"
+  ]
+}
