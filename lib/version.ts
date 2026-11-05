@@ -3,7 +3,7 @@
  * junto con una entrada nueva ARRIBA en CHANGELOG.md (un test lo verifica).
  */
 export const VERSION = "1.5";
-export const FECHA_VERSION = "2026-11-01"; // AAAA-MM-DD
+export const FECHA_VERSION = "2026-11-05"; // AAAA-MM-DD
 
 export function fechaVersionAr(): string {
   const [a, m, d] = FECHA_VERSION.split("-");
