@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "estado": "completo",
+  "banco_emisor": "Banco Patagonia",
+  "monto": 110300,
+  "moneda": "ARS",
+  "fecha": "2026-11-03",
+  "hora": "13:29",
+  "nro_operacion": "2028292571",
+  "ordenante": "GUTIERREZ, GERMAN RAMIRO",
+  "cuit_ordenante": null,
+  "cbu_origen": null,
+  "banco_origen": null,
+  "cbu_destino": "0000046800000159185229",
+  "banco_destino": "Pago Virtual del Sur",
+  "alias_destino": null,
+  "destinatario": "PRESTIGIO PAGOS S.A.",
+  "concepto": "Varios",
+  "advertencias": []
+}

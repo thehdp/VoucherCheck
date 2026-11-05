@@ -8,6 +8,7 @@
     { "banco": "mercadopago", "frases": ["operacion de mercado pago"] },
     { "banco": "icbc", "frases": ["nro de movimiento"] },
     { "banco": "naranjax", "frases": ["naranjax", "naranja x"] },
+    { "banco": "patagonia", "frases": ["cuit / cuil / dni", "bancopatagonia", "banco patagonia"] },
     { "banco": "personalpay", "frases": ["dinero personal pay", "id bancario"] },
     { "banco": "newfinance", "frases": ["id coelsa", "1d coelsa"] }
   ]
