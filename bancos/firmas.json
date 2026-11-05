@@ -12,6 +12,11 @@
       "frases": [
         "office banking",
         "deposito en efectivo"
+      ],
+      "todas": [
+        "transferencia enviada",
+        "cuenta en banco galicia",
+        "concepto"
       ]
     },
     {
@@ -63,9 +68,9 @@
     },
     {
       "banco": "newfinance",
-      "frases": [
-        "id coelsa",
-        "1d coelsa"
+      "todas": [
+        "referencias",
+        "coelsa"
       ]
     },
     {

@@ -82,10 +82,13 @@ Estas reglas se aplican al escribir cada parser (algunas llegan recién en la fa
 - Captura en modo oscuro. `ordenante` = "Titular" (con su CUIT). El "$" se lee como "S". La captura no trae número de operación: sale `no_leido` hasta que Alberto defina de dónde sacarlo (ver si la app muestra más abajo un ID o comprobante).
 - **Modo oscuro en el OCR:** si la mediana de brillo es < 100 se aplica `linear(4, 16 - 4·fondo)` + `negate`. El texto secundario es gris tenue (brillo ~87 sobre un fondo de ~26) y sin ese estiramiento no se lee. Verificado que ninguna imagen clara llega a ese umbral.
 
-## Galicia: los 3 formatos
+## Galicia: los 4 formatos
 1. PDF Office Banking "Datos del pago": `nro_operacion` = "Identificador de la operación".
 2. Ticket de cajero "Depósito en efectivo": `nro_operacion` = 21 dígitos sin el de "Estado"; ordenante `DEPOSITO`.
 3. Captura Office Banking "Detalle de movimiento" (débito): `nro_operacion` = "Número de comprobante" (único número del comprobante; sin confirmar explícitamente con Alberto). Sin ordenante, hora ni CBU.
+4. Captura de la app "Transferencia enviada" (De: / Para:): `nro_operacion` = "N° de operación" (nunca el ID COELSA). `ordenante` = "De:" con su CUIT; `banco_origen` = "Cuenta en …" del comprobante.
+
+**Firmas:** una frase genérica sola puede robarle el banco a otro (le pasó a New Finance con "id coelsa"). Para firmas genéricas se usa `todas` (deben estar todas las frases) en `bancos/firmas.json`. Al sumar un banco nuevo, revisar que su firma no aparezca en los comprobantes de los demás.
 
 ## Banco Patagonia
 - Firma por formato (`cuit / cuil / dni`) porque el logo no se lee por OCR. `nro_operacion` = "Nº de transacción" (confirmado por Alberto el 2026-11-05; el "Nº de control" tiene formato tipo Coelsa y no se usa). `ordenante` tal como viene (`APELLIDO, NOMBRE`).

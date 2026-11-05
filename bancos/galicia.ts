@@ -1,5 +1,5 @@
 import type { Parser } from "@/lib/tipos";
-import { corregirNumerico, limpiarEspacios, normalizarCuit, normalizarFecha, normalizarHora, normalizarMonto } from "@/lib/normalizar";
+import { cbuDeOcr, corregirNumerico, limpiarEspacios, normalizarCuit, normalizarFecha, normalizarHora, normalizarMonto } from "@/lib/normalizar";
 
 /**
  * Galicia Office Banking (comprobante de transferencia a proveedores).
@@ -11,6 +11,7 @@ export const galicia: Parser = {
   parsear(texto) {
     if (/dep[oó]sito en efectivo/i.test(texto)) return parsearDeposito(texto);
     if (/detalle de movimiento/i.test(texto)) return parsearMovimiento(texto);
+    if (/^De:\s*$/im.test(texto) && /^Para:\s*$/im.test(texto)) return parsearApp(texto);
     const pagador = texto.match(/Datos del pagador[\s\S]*?\n(\d{11})\s+([^\n]+)/);
     const dest = texto.match(/Datos del destinatario[\s\S]*?\n(\d{11})\s+([^\n]+)/);
     const concepto = texto.match(/Concepto Descripci[oó]n\s*\n\s*(\S[^\n]*?)\s+-?\s*\n/)?.[1];
@@ -80,5 +81,38 @@ function parsearMovimiento(texto: string) {
     nro_operacion: limpiarEspacios(iNro >= 0 ? lineas[iNro + 1]?.match(/^\d{4,}$/)?.[0] : undefined),
     destinatario: limpiarEspacios(leyendas[0]),
     concepto: iCuit >= 0 ? limpiarEspacios(leyendas[iCuit + 1]) : null,
+  };
+}
+
+/**
+ * App de Galicia, "Transferencia enviada" (captura).
+ * - nro_operacion = "N° de operación". El "ID COELSA" no se usa nunca.
+ * - ordenante = "De:" (con su CUIT); banco_origen = "Cuenta en …" tal como dice el comprobante.
+ *   La cuenta de origen (CA $ N° …) no es un CBU: cbu_origen queda null.
+ * - destinatario = "Para:"; CBU/CVU de destino de la línea "CVU …" / "CBU …".
+ */
+function parsearApp(texto: string) {
+  const lineas = texto.split("\n").map((l) => l.trim()).filter(Boolean);
+  const iDe = lineas.findIndex((l) => /^De:$/i.test(l));
+  const iPara = lineas.findIndex((l) => /^Para:$/i.test(l));
+  const iConcepto = lineas.findIndex((l, k) => k > iPara && /^Concepto$/i.test(l));
+  const bloqueDe = lineas.slice(iDe + 1, iPara);
+  const bloquePara = lineas.slice(iPara + 1, iConcepto > iPara ? iConcepto : undefined);
+  const cuit = bloqueDe.find((l) => /^CUIT\b/i.test(l))?.replace(/^CUIT\s*/i, "");
+  const cuentaEn = bloqueDe.find((l) => /^Cuenta en\b/i.test(l))?.replace(/^Cuenta en\s*/i, "");
+  const cbuCrudo = bloquePara.find((l) => /^(CBU|CVU)\b/i.test(l))?.replace(/^(CBU|CVU)\s*/i, "");
+  const cbu = cbuDeOcr(cbuCrudo);
+  return {
+    advertencias: cbuCrudo && !cbu ? ["CBU/CVU destino ilegible (posible error de OCR)"] : [],
+    monto: normalizarMonto(lineas.find((l) => /^\$\s*[\d.,]+$/.test(l))?.replace(/^\$\s*/, "")),
+    fecha: normalizarFecha(texto.match(/\d{1,2}\/\d{1,2}\/\d{4}/)?.[0]),
+    hora: normalizarHora(texto.match(/\d{4}\s*[-·•]\s*(\d{1,2}:\d{2})\s*h/i)?.[1]),
+    nro_operacion: limpiarEspacios(texto.match(/N\S{0,2}\s+de operaci[oó]n\s*\n\s*(\d{5,})/i)?.[1]),
+    ordenante: limpiarEspacios(bloqueDe[0]),
+    cuit_ordenante: normalizarCuit(cuit),
+    banco_origen: limpiarEspacios(cuentaEn),
+    destinatario: limpiarEspacios(bloquePara[0]),
+    cbu_destino: cbu,
+    concepto: limpiarEspacios(lineas[iConcepto + 1]),
   };
 }

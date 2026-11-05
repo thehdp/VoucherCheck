@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "estado": "completo",
+  "banco_emisor": "Banco Galicia",
+  "monto": 92600,
+  "moneda": "ARS",
+  "fecha": "2026-11-04",
+  "hora": "11:21",
+  "nro_operacion": "43334127375",
+  "ordenante": "JIMENA AGUSTINA FARIAS",
+  "cuit_ordenante": "27440697572",
+  "cbu_origen": null,
+  "banco_origen": "Banco Galicia",
+  "cbu_destino": "0000046800000159185229",
+  "banco_destino": "Pago Virtual del Sur",
+  "alias_destino": null,
+  "destinatario": "Prestigio Pagos S.A.",
+  "concepto": "Varios",
+  "advertencias": []
+}

@@ -3,6 +3,11 @@
 Cada cambio que llega a producción sube la versión (`lib/version.ts`) y suma una entrada acá, arriba de todo.
 Formato del título: `## V<versión> · <AAAA-MM-DD>`.
 
+## V1.11 · 2026-11-05
+- Galicia, cuarto formato: la captura de la app, "Transferencia enviada" (De: / Para:). Lee monto, fecha, hora, ordenante con su CUIT, banco de origen, destinatario, CVU/CBU de destino, concepto y `nro_operacion` = "N° de operación". El "ID COELSA" no se usa.
+- **Corrección importante:** ese comprobante se clasificaba mal como "New Finance", porque la firma de New Finance era solo la frase "id coelsa", que también aparece en el de Galicia. Ahora las firmas pueden exigir **varias frases a la vez** (`todas` en `bancos/firmas.json`): New Finance pide "referencias" y "coelsa"; la app de Galicia pide "transferencia enviada", "cuenta en banco galicia" y "concepto".
+- Se verificaron las 15 imágenes y los 2 PDF anteriores: todas dan igual que antes.
+
 ## V1.10 · 2026-11-05
 - Brubank (captura en modo oscuro): monto, fecha, hora, destinatario, CBU/CVU de destino, y titular con su CUIT como ordenante.
 - La captura de Brubank **no trae número de operación**, así que sale `no_leido` hasta que se defina de dónde sacarlo.
